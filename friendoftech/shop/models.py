@@ -39,6 +39,14 @@ class Product(models.Model):
         auto_now_add=True,
     )
 
+    quantity = models.PositiveIntegerField(
+        default=0,
+    )
+
+    @property
+    def in_stock(self):
+        return True if self.quantity > 0 else False
+
 
 class Review(models.Model):
     MAX_COMMENT_LENGTH = 200

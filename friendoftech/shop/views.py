@@ -2,7 +2,7 @@ from django.views import generic as views
 # Create your views here.
 
 
-class ProductsListView(views.ListView):
+class ProductListView(views.ListView):
     pass
 
 
@@ -10,5 +10,5 @@ class AddProductView(views.CreateView):
     pass
 
 
-class EditProdcutView(views.CreateView):
+class EditProductView(views.CreateView):
     pass
