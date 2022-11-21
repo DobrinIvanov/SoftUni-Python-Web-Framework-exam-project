@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 import environ
+from django.urls import reverse_lazy
 
 # Initialise environment variables
 env = environ.Env()
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 
     'friendoftech.core',
     'friendoftech.accounts',
+    'friendoftech.shop',
 ]
 
 MIDDLEWARE = [
@@ -166,4 +168,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_FROM_EMAIL = "info@dobrinivanov.net"
 DJANGO_SUPERUSER_PASSWORD = env('DJANGO_SUPERUSER_PASSWORD')
+
+AUTH_USER_MODEL = 'accounts.AppUser'
+
+LOGOUT_REDIRECT_URL = reverse_lazy('index')
 

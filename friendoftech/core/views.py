@@ -13,7 +13,7 @@ class IndexView(views.TemplateView):
 class ContactUsView(views.FormView):
     template_name = 'core/contact.html'
     form_class = ContactForm
-    success_url = ''
+    success_url = 'index'
 
     #
     # def form_valid(self, form_class):
