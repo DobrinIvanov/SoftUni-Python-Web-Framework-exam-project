@@ -6,45 +6,39 @@
 <title>Web Tech</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<!--
 <script language="javascript" type="text/javascript">
+
 function clearText(field) {
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
-</script>
+
+</script> -->
 </head>
 <body>
 <div id="header">
     <div id="site_title"> <a href="{% url 'index' %}"></a> </div>
-  <div id="header_right">
-    <div id="newsletter_box">
-      <form action="#" method="get">
-        <input type="text" id="user" name="user" class="newsletter_email" value="Enter your email address"  onfocus="clearText(this)" onblur="clearText(this)" />
-        <input style="font-weight: bold;" type="submit" name="submit" id="submit" value="" />
-      </form>
-    </div>
-  </div>
+    <!-- Insert Newsletter here -->
   <div class="cleaner"></div>
 </div>
 <!-- end of header -->
 <div id="menu_wrapper">
   <div id="menu">
     <ul>
-      <li><a href="{% url 'index' %}" class="current"><span></span>Home</a></li>
+      <!-- One can place 'class="current"' so the active page shows with a different BG in the menu -->
+      <li><a href="{% url 'index' %}"><span></span>Home</a></li>
       <li><a href="{% url 'list_products' %}"><span></span>Shop</a></li>
       <li><a href="{% url 'contact' %}"><span></span>Contact Us</a></li>
       <li><a href="{% url 'news' %}"><span></span>News</a></li>
       <li><a href="{% url 'about' %}"><span></span>About</a></li>
-{#      <li><a href="#"><span></span>Flash Files</a></li>#}
     </ul>
   </div>
 </div>
 <!-- end of menu -->
-
 {% block page_content %}
-
+    <!-- Extending block -->
 {% endblock %}
-
 <div id="footer">
   <ul class="footer_menu">
     <li class="first"><a href="{% url 'index' %}">Home</a></li>
@@ -52,7 +46,6 @@ function clearText(field) {
     <li><a href="{% url 'contact' %}">Contact Us</a></li>
     <li><a href="{% url 'news' %}">News</a></li>
     <li><a href="{% url 'about' %}">About</a></li>
-{#    <li><a href="#">Freebies</a></li>#}
   </ul>
   Copyright &copy; 2022 <a href="{% url 'index' %}">Friend of Tech</a> | Designed by FriendofTech</div>
 </body>

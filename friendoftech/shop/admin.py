@@ -6,9 +6,10 @@ from friendoftech.shop.models import Product, Review
 # Register your models here.
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'category', 'quantity', 'price')
 
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('pk', 'is_positive', 'author')
+

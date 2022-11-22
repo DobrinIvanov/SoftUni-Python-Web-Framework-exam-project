@@ -1,10 +1,281 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Shop - Friend of Tech</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
 
-</body>
-</html>
+{% block page_content %}
+    <div id="main"><span class="tm_bottom"></span>
+        <div id="content">
+            <div class="content_box">
+                <h1>Welcome to <span>Friend of Tech</span></h1>
+                <p>Find latest technology news from every corner of the globe and many technology products
+                    at Friendofte.ch, your online tech portal!</p>
+            </div>
+            <div class="post_box">
+                <div class="header">
+                    <h2><a href="#">Cum sociis natoque penatibus et magnis</a></h2>
+                    <div class="tag"><strong>Tags:</strong> <a href="#">Photography</a>, <a href="#">Free Photos</a>, <a
+                            href="#">HDR</a></div>
+                    <span class="posted_date"> 25 Feb <strong>2010</strong> </span></div>
+                <img src="images/image_01.jpg" alt=""/>
+                <div class="pb_right">
+                    <p>Praesent mattis varius quam. Vestibulum ullamcorper ipsum nec augue. Vestibulum auctor odio eget
+                        ante. Nunc commodo, magna pharetra semper vehicula, dui ligula feugiat elit, et euismod nunc
+                        orci ut libero. Etiam sodales massa vel metus. Mauris et elit quis mauris aliquet luctus.</p>
+                    <div class="comment"><a href="#">Comment</a></div>
+                </div>
+                <div class="cleaner"></div>
+            </div>
+            <div class="post_box">
+                <div class="header">
+                    <h2><a href="#">Quisque dictum pharetra neque</a></h2>
+                    <div class="tag"><strong>Tags:</strong> <a href="#">Photography</a>, <a href="#">Free Photos</a>, <a
+                            href="#">Royalty</a></div>
+                    <span class="posted_date"> 25 Feb <strong>2010</strong> </span></div>
+                <img src="images/image_02.jpg" alt=""/>
+                <div class="pb_right">
+                    <p>Aliquam pretium porta odio. Fusce quis diam sit amet tortor luctus pellentesque. Donec accumsan
+                        urna non elit tristique mattis. Vivamus fermentum orci viverra nisl. In nec magna id ipsum
+                        aliquam dictum. Donec euismod enim et risus. Nunc dictum, massa non dignissim commodo, metus
+                        quam vehicula lorem, et dignissim enim augue vitae pede. D</p>
+                    <div class="comment"><a href="#">Comment</a></div>
+                </div>
+                <div class="cleaner"></div>
+            </div>
+            <div class="post_box">
+                <div class="header">
+                    <h2><a href="#">Quisque dictum pharetra neque</a></h2>
+                    <div class="tag"><strong>Tags:</strong> <a href="#">Flash</a>, <a href="#">Free Files</a>, <a
+                            href="#">AS3</a></div>
+                    <span class="posted_date"> 25 Feb <strong>2010</strong> </span></div>
+                <img src="images/image_02.jpg" alt=""/>
+                <div class="pb_right">
+                    <p>Curabitur eleifend congue leo. Donec a purus vel purus sollicitudin placerat. Nunc at sem. Sed
+                        pellentesque placerat augue. Mauris pede nisl, placerat nec, lobortis vitae, dictum sed,
+                        neque.</p>
+                    <div class="comment"><a href="#">Comment</a></div>
+                </div>
+                <div class="cleaner"></div>
+            </div>
+            <div class="post_box pb_last">
+                <div class="header">
+                    <h2><a href="#">Mauris quis nulla sed ipsum pretium sagittis</a></h2>
+                    <div class="tag"><strong>Tags:</strong> <a href="#">HTML</a>, <a href="#">Free Templates</a>, <a
+                            href="#">CSS</a></div>
+                    <span class="posted_date"> 25 Feb <strong>2010</strong> </span></div>
+                <img src="images/image_03.jpg" alt=""/>
+                <div class="pb_right">
+                    <p>Quisque in diam a justo condimentum molestie. Vivamus a velit. Cum sociis natoque penatibus et
+                        magnis dis parturient montes, nascetur ridiculus mus. Curabitur quis velit quis tortor tincidunt
+                        aliquet. Vivamus leo velit, convallis id, ultrices sit amet, tempor a, libero.</p>
+                    <div class="comment"><a href="#">Comment</a></div>
+                </div>
+                <div class="cleaner"></div>
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <div class="sidebar_box">
+                <h3>Categories</h3>
+                <div class="sb_content">
+                    <ul class="sidebar_menu">
+                        <li><a href="#">CSS Techniques</a></li>
+                        <li><a href="#">Web Design Tips</a></li>
+                        <li><a href="#">Best Wallpapers</a></li>
+                        <li><a href="#">Free Fonts</a></li>
+                        <li><a href="#">Photoshop Tutorials</a></li>
+                        <li><a href="#">3D Animation Tutorials</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar_box">
+                <h3>Archives</h3>
+                <div class="sb_content">
+                    <ul class="sidebar_menu">
+                        <li><a href="#">CSS Templates</a></li>
+                        <li><a href="#">Web Design Ideas</a></li>
+                        <li><a href="#">Free Wallpapers</a></li>
+                        <li><a href="#">Free Pixel Fonts</a></li>
+                        <li><a href="#">Illustrator Tutorials</a></li>
+                        <li><a href="#">3D Character Tutorials</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar_box">
+                <h3>Our Friends</h3>
+                <div class="sb_content">
+                    <ul class="sidebar_menu">
+                        <li><a href="#">Free Flash Files</a></li>
+                        <li><a href="#">Free CSS Templates</a></li>
+                        <li><a href="#">Web Design Tips</a></li>
+                        <li><a href="#">Flash XML Galleries</a></li>
+                        <li><a href="#">Inspiring Flash Websites</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cleaner"></div>
+    </div>
+    <!-- Categories Start -->
+    <div class="container-fluid pt-5">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Categories</span>
+        </h2>
+        <div class="row px-xl-5 pb-3">
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-1.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-2.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-3.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-4.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-4.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-3.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-2.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-1.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-2.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-1.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-4.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/cat-3.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Category Name</h6>
+                            <small class="text-body">100 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Categories End -->
+
+{% endblock %}

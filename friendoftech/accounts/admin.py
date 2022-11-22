@@ -16,3 +16,6 @@ class AppUserAdmin(admin.ModelAdmin):
         'groups', 'user_permissions',
         'last_login',
         )
+
+    list_display = ('email', 'last_login', 'is_staff', 'is_superuser')
+

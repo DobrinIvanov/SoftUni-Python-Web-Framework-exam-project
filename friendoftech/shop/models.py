@@ -47,6 +47,9 @@ class Product(models.Model):
     def in_stock(self):
         return True if self.quantity > 0 else False
 
+    def __str__(self):
+        return self.name
+
 
 class Review(models.Model):
     MAX_COMMENT_LENGTH = 200

@@ -103,12 +103,20 @@ DATABASES = {
 # CACHE
 # To cache views:
 # Function views: use `@cache_page(seconds)`
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379',
+
+if not DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': 'redis://127.0.0.1:6379',
+        }
     }
-}
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -155,16 +163,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-# if os.getenv('GAE_APPLICATION', None):
-#     EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
-#     ANYMAIL = {
-#         "MAILJET_API_KEY": os.getenv('MYAPP_MAILJET_API_KEY'),
-#         "MAILJET_SECRET_KEY": os.getenv('MYAPP_MAILJET_API_SECRET'),
-#     }
-# else:
-#     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-#     EMAIL_FILE_PATH = '/tmp/django-emails'
 
 DEFAULT_FROM_EMAIL = "info@dobrinivanov.net"
 DJANGO_SUPERUSER_PASSWORD = env('DJANGO_SUPERUSER_PASSWORD')
