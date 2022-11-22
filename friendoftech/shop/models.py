@@ -43,12 +43,52 @@ class Product(models.Model):
         default=0,
     )
 
+    sold = models.PositiveIntegerField(
+        default=0,
+    )
+
     @property
     def in_stock(self):
         return True if self.quantity > 0 else False
 
     def __str__(self):
         return self.name
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(
+        AppUser,
+        primary_key=True,
+        unique=True,
+        on_delete=models.CASCADE,
+    )
+
+    products = models.ManyToManyField(
+        Product,
+        related_name='carts',
+        through='CartProduct'
+    )
+
+
+class CartProduct(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.CASCADE,
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=1,
+    )
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(fields=['product', 'cart'], name='unique_product_cart')
+    )
 
 
 class Review(models.Model):
