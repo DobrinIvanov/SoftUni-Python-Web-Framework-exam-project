@@ -15,6 +15,15 @@ class ContactUsView(views.FormView):
     form_class = ContactForm
     success_url = 'index'
 
+
+class NewsView(views.ListView):
+    pass
+
+
+class AboutUsView(views.TemplateView):
+    pass
+
+
     #
     # def form_valid(self, form_class):
     #     form_class.send_mail()

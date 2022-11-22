@@ -3,7 +3,7 @@ from django.views import generic as views
 
 
 class ProductListView(views.ListView):
-    pass
+    template_name = 'shop/list_products.html'
 
 
 class AddProductView(views.CreateView):
