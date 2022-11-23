@@ -66,7 +66,7 @@ class Cart(models.Model):
     products = models.ManyToManyField(
         Product,
         related_name='carts',
-        through='CartProduct'
+        through='CartProduct',
     )
 
 
@@ -86,9 +86,24 @@ class CartProduct(models.Model):
     )
 
     class Meta:
-        constraints = (
-            models.UniqueConstraint(fields=['product', 'cart'], name='unique_product_cart')
+        unique_together = (("product", "cart"),)
+
+
+class Order(models.Model):
+    owner = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
     )
+
+    products = models.ManyToManyField(
+        Product,
+        related_name='carts',
+        through='CartProduct',
+    )
+
+    @property
+    def total_price(self):
+        return sum([p.price for p in self.products.CartProduct])
 
 
 class Review(models.Model):

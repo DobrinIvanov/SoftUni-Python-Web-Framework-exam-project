@@ -2,15 +2,10 @@ from django.contrib.auth import models as auth_models, get_user_model
 from friendoftech.accounts.managers import AppUserManager
 from django.db import models
 
-from friendoftech.shop.models import Cart
-
 
 # Create your models here.
 
 # UserModel = get_user_model()
-
-
-# TODO both models
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     MAX_NAME_LENGTH = 30
 
@@ -43,11 +38,6 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     )
 
     USERNAME_FIELD = 'email'
-
-    shopping_cart = models.OneToOneField(
-        Cart,
-
-    )
 
     objects = AppUserManager()
 
