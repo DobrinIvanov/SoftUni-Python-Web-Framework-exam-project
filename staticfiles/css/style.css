@@ -176,24 +176,38 @@ a.continue { color: #F00; font-weight: bold; text-decoration: none; }
 	width: 964px;
 	padding: 0 30px 50px;
 	margin: 0 auto;
-	background: #272727 url(../images/content_top.jpg) top no-repeat;
+	background-color: #8c8c8c;
+	/* replace ^ with the bottom one
+	/*background: #272727 url(../images/content_top.jpg) top no-repeat;*/
 }
 
-#main .tm_bottom {
-	 position: absolute;
-	 width: 1024px;
-	 height: 60px;
-	 bottom: 0;
-	 left: 0;
-	 background: url(../images/content_bottom.jpg) no-repeat;	 
+/*#main .tm_bottom {*/
+/*	 position: absolute;*/
+/*	 width: 1024px;*/
+/*	 height: 60px;*/
+/*	 bottom: 0;*/
+/*	 left: 0;*/
+/*	 background: url(../images/content_bottom.jpg) no-repeat;	 */
+/*}*/
+
+#my-content {
+	padding: 30px 30px 30px 30px;
+	background-color: #ffffff;
+
 }
 
-#content {
-	float: left;
-	width: 600px;
-	padding: 30px 30px 30px 0;
-	border-right: 1px dashed #363636;
+
+#my-content a {
+	color: black;
+	border: 1px solid black;
 }
+
+/*#content {*/
+/*	float: left;*/
+/*	width: 600px;*/
+/*	padding: 30px 30px 30px 0;*/
+/*	border-right: 1px dashed #363636;*/
+/*}*/
 
 #content h1 span {
 	color: #39AB27;

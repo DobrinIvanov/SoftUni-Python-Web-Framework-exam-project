@@ -56,7 +56,7 @@ class Product(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         AppUser,
         primary_key=True,
         unique=True,
@@ -65,7 +65,7 @@ class Cart(models.Model):
 
     products = models.ManyToManyField(
         Product,
-        related_name='carts',
+        related_name='cart',
         through='CartProduct',
     )
 
@@ -89,22 +89,21 @@ class CartProduct(models.Model):
         unique_together = (("product", "cart"),)
 
 
-class Order(models.Model):
-    owner = models.ForeignKey(
-        AppUser,
-        on_delete=models.CASCADE,
-    )
-
-    products = models.ManyToManyField(
-        Product,
-        related_name='carts',
-        through='CartProduct',
-    )
-
-    @property
-    def total_price(self):
-        return sum([p.price for p in self.products.CartProduct])
-
+# class Order(models.Model):
+#     owner = models.ForeignKey(
+#         AppUser,
+#         on_delete=models.CASCADE,
+#     )
+#
+#     products = models.ManyToManyField(
+#         Product,
+#         related_name='carts',
+#         through='CartProduct',
+#     )
+#
+#     @property
+#     def total_price(self):
+#         return sum([p.price for p in self.products.CartProduct])
 
 class Review(models.Model):
     MAX_COMMENT_LENGTH = 200
@@ -112,7 +111,6 @@ class Review(models.Model):
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
-        primary_key=True,
     )
 
     author = models.ForeignKey(

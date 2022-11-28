@@ -1,8 +1,10 @@
 {% extends 'base/base.html' %}
 
 {% block page_content %}
-    <div id="main"><span class="tm_bottom"></span>
-        <div id="content">
+    <div id="main">
+        {#        <span class="tm_bottom"></span>#}
+        <!-- original code below -->
+        <!-- <div id="content">
             <div class="content_box">
                 <h1>Welcome to <span>Friend of Tech</span></h1>
                 <p>Find latest technology news from every corner of the globe and many technology products
@@ -272,7 +274,25 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div> -->
+        <div id="my-content">
+            <div id="sign-buttons">
+                <ul>
+            {% if not request.user.is_authenticated %}
+
+                    <li><a href="{% url 'sign-up' %}">Sign up!</a></li>
+                    <li><a href="{% url 'sign-in' %}">Sign in!</a></li>
+            {% else %}
+                    <li><a href="{% url 'profile-details' pk=user.pk %}">Profile details</a></li>
+                    <li><a href="{% url 'sign-out' %}">Logout!</a></li>
+            {% endif %}
+                </ul>
+            </div>
+            <div id="other buttons">
+            </div>
+        </div>
+
+
         <div class="cleaner"></div>
     </div>
     <!-- Categories Start -->

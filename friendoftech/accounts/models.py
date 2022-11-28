@@ -27,7 +27,7 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         null=False,
     )
 
-    date_joined=models.DateTimeField(
+    date_joined = models.DateTimeField(
         auto_now_add=True,
     )
 
@@ -40,25 +40,3 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = AppUserManager()
-
-
-class Profile(models.Model):
-
-    first_name = models.CharField(
-        max_length=30,
-    )
-
-    last_name = models.CharField(
-        max_length=30,
-    )
-
-    age = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-    )
-
-    user = models.OneToOneField(
-        AppUser,
-        primary_key=True,
-        on_delete=models.CASCADE,
-    )

@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'friendoftech.shop',
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -170,4 +173,4 @@ DJANGO_SUPERUSER_PASSWORD = env('DJANGO_SUPERUSER_PASSWORD')
 AUTH_USER_MODEL = 'accounts.AppUser'
 
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
-
+LOGIN_URL = reverse_lazy('sign-in')
