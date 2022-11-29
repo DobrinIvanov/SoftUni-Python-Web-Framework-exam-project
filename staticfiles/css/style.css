@@ -202,6 +202,10 @@ a.continue { color: #F00; font-weight: bold; text-decoration: none; }
 	border: 1px solid black;
 }
 
+#profile-details {
+	color: black;
+}
+
 /*#content {*/
 /*	float: left;*/
 /*	width: 600px;*/

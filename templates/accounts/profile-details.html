@@ -4,7 +4,13 @@
     <div id="main"><span class="tm_bottom"></span>
         <div id="content">
             <div class="profile-details">
-                {{ user }}
+                {{ object.first_name }}
+                <br/>
+                {{ object.last_name }}
+                <br/>
+                {{ object.email }}
+                <br/>
+                {{ object.date_joined }}
             </div>
         </div>
         <div class="cleaner"></div>

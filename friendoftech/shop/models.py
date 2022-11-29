@@ -105,6 +105,8 @@ class CartProduct(models.Model):
 #     def total_price(self):
 #         return sum([p.price for p in self.products.CartProduct])
 
+
+# TODO Fix relations between Review, Product, AppUser
 class Review(models.Model):
     MAX_COMMENT_LENGTH = 200
 

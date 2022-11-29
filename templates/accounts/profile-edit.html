@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block page_content %}
+    <div id="main"><span class="tm_bottom"></span>
+        <div id="content">
+            <div class="profile-edit">
+                <form method="POST" action="{% url 'profile-edit' pk=request.user.pk %}">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button>Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cleaner"></div>
+    </div>
+
+{% endblock %}

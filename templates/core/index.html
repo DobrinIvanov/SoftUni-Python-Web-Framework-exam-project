@@ -283,7 +283,8 @@
                     <li><a href="{% url 'sign-up' %}">Sign up!</a></li>
                     <li><a href="{% url 'sign-in' %}">Sign in!</a></li>
             {% else %}
-                    <li><a href="{% url 'profile-details' pk=user.pk %}">Profile details</a></li>
+                    <li><a href="{% url 'profile-details' pk=request.user.pk %}">Profile details</a></li>
+                    <li><a href="{% url 'profile-edit' pk=request.user.pk %}">Edit profile</a></li>
                     <li><a href="{% url 'sign-out' %}">Logout!</a></li>
             {% endif %}
                 </ul>

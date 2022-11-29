@@ -34,6 +34,16 @@ class SignOutView(auth_views.LogoutView):
 class ProfileView(views.DetailView):
     model = UserModel
     template_name = 'accounts/profile-details.html'
-    context_object_name = 'user'
 
 
+class ProfileEditView(views.UpdateView):
+    model = UserModel
+    template_name = 'accounts/profile-edit.html'
+    fields = ('first_name', 'last_name', 'email')
+
+
+class ChangePasswordView(views.UpdateView):
+    model = UserModel
+    template_name = 'accounts/profile-password-update.html'
+    fields = ('password1', 'password2')
+    success_url = reverse_lazy('profile-details')
