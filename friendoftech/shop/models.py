@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.template.defaultfilters import slugify
 
 from friendoftech.accounts.models import AppUser
 from friendoftech.shop.enums import Category
@@ -46,6 +47,18 @@ class Product(models.Model):
     sold = models.PositiveIntegerField(
         default=0,
     )
+
+    slug = models.SlugField(
+        unique=True,
+        editable=False,
+    )
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = slugify(f'{self.name}-{self.id}')
+
+        return super().save(*args, **kwargs)
 
     @property
     def in_stock(self):
