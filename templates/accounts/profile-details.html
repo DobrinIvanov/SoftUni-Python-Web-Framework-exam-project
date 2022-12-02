@@ -2,16 +2,30 @@
 
 {% block page_content %}
     <div id="main"><span class="tm_bottom"></span>
-        <div id="content">
-            <div class="profile-details">
-                {{ object.first_name }}
-                <br/>
-                {{ object.last_name }}
-                <br/>
-                {{ object.email }}
-                <br/>
-                {{ object.date_joined }}
+        <div id="my-content">
+            <div id="profile-details">
+                <p>
+                    <b>First name:</b>
+                    {{ object.first_name }}
+                </p>
+                <p>
+                <b>Last name:</b>
+                    {{ object.last_name }}
+                </p>
+                <p>
+                <b>Email address:</b>
+                    {{ object.email }}
+                </p>
+                <p>
+                <b>Date joined:</b>
+                    {{ object.date_joined }}
+                </p>
             </div>
+            {% if request.user.id == object.id or request.user.is_staff %}
+            <div id="profile-actions">
+                <a href="{% url 'profile-edit' pk=object.pk %}">Edit Profile</a>
+            </div>
+            {% endif %}
         </div>
         <div class="cleaner"></div>
     </div>

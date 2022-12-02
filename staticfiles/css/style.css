@@ -193,7 +193,11 @@ a.continue { color: #F00; font-weight: bold; text-decoration: none; }
 #my-content {
 	padding: 30px 30px 30px 30px;
 	background-color: #ffffff;
+}
 
+#profile-details {
+	width: 50%;
+	block-size: 50%;
 }
 
 

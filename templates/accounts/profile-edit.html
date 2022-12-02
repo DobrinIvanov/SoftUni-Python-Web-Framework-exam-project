@@ -7,8 +7,11 @@
                 <form method="POST" action="{% url 'profile-edit' pk=request.user.pk %}">
                     {{ form.as_p }}
                     {% csrf_token %}
-                    <button>Submit</button>
+                    <button>Save changes</button>
                 </form>
+                <div>
+                    <a href="">Change password</a>
+                </div>
             </div>
         </div>
         <div class="cleaner"></div>
