@@ -1,11 +1,11 @@
 # from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import request
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views, login, get_user_model
 from django.views import generic as views
 from friendoftech.accounts.forms import AppUserCreationForm
-from friendoftech.accounts.models import AppUser
 
 UserModel = get_user_model()
 # Create your views here.
@@ -24,7 +24,9 @@ class SignUpView(views.CreateView):
 
 class SignInView(auth_views.LoginView):
     template_name = 'accounts/sign-in.html'
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse_lazy('index')
 
 
 class SignOutView(auth_views.LogoutView):
@@ -43,8 +45,11 @@ class ProfileEditView(views.UpdateView):
     fields = ('first_name', 'last_name', 'email')
 
     def get_success_url(self):
-        return reverse_lazy('profile-details', kwargs={'pk': self.request.resolver_match.kwargs['pk']})
+        return reverse_lazy('profile-details', kwargs={'pk': self.kwargs['pk']})
 
 
 class ChangePasswordView(auth_views.PasswordChangeView):
-    template_name = ''
+    form_class = PasswordChangeForm
+    template_name = 'accounts/profile-password-update.html'
+    success_url = reverse_lazy('index')
+
