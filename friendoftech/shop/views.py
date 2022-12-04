@@ -1,14 +1,19 @@
 from django.views import generic as views
+
+from friendoftech.shop.models import Product
+
+
 # Create your views here.
 
 
 class ProductListView(views.ListView):
-    template_name = 'shop/list_products.html'
+    model = Product
+    template_name = 'shop/products-list.html'
 
 
-class AddProductView(views.CreateView):
+class ProductDetailsView(views.DetailView):
     pass
 
 
-class EditProductView(views.CreateView):
+class ProductEditView(views.CreateView):
     pass

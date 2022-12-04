@@ -36,6 +36,11 @@ class Product(models.Model):
         blank=False,
     )
 
+    image = models.ImageField(
+        null=True,
+        upload_to='images'
+    )
+
     added = models.DateField(
         auto_now_add=True,
     )

@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div id="main"><span class="tm_bottom"></span>
+        <div id="my-content">
+            <div class="profile-edit">
+                {% for object in object_list %}
+                    <ul>
+                        <li>
+                            <img src="{% static object.image %}" alt="product-image"/></li>
+                        <li>
+                            <h5>Name:</h5>{{ object.name }}</li>
+                        <li>
+                            <h5>Price:</h5>{{ object.price }}</li>
+                        <li>
+                            <h5>Description:</h5>{{ object.description }}</li>
+
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="cleaner"></div>
+    </div>
+
+{% endblock %}

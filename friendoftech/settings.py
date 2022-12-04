@@ -161,14 +161,14 @@ STATICFILES_DIRS = [
     BASE_DIR / 'staticfiles'
 ]
 
+# Images
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/images')
+MEDIA_URL = '/images/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-DEFAULT_FROM_EMAIL = "info@dobrinivanov.net"
-DJANGO_SUPERUSER_PASSWORD = env('DJANGO_SUPERUSER_PASSWORD')
 
 AUTH_USER_MODEL = 'accounts.AppUser'
 

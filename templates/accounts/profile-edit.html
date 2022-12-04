@@ -2,7 +2,7 @@
 
 {% block page_content %}
     <div id="main"><span class="tm_bottom"></span>
-        <div id="content">
+        <div id="my-content">
             <div class="profile-edit">
                 <form method="POST" action="{% url 'profile-edit' pk=object.id %}">
                     {{ form.as_p }}

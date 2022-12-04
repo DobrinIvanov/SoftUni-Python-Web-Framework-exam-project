@@ -200,6 +200,9 @@ a.continue { color: #F00; font-weight: bold; text-decoration: none; }
 	block-size: 50%;
 }
 
+#my-content form {
+	color: black;
+}
 
 #my-content a {
 	color: black;

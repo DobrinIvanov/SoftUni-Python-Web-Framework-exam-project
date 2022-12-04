@@ -34,7 +34,7 @@ class SignOutView(auth_views.LogoutView):
     success_url = reverse_lazy('index')
 
 
-class ProfileView(views.DetailView):
+class ProfileDetailsView(views.DetailView):
     model = UserModel
     template_name = 'accounts/profile-details.html'
 
