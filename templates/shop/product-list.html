@@ -7,14 +7,16 @@
                 {% for object in object_list %}
                     <ul>
                         <li>
-                            <img src="{% static object.image %}" alt="product-image"/></li>
+                            <img src="{% static object.image.url %}" alt="product-image"/></li>
                         <li>
                             <h5>Name:</h5>{{ object.name }}</li>
                         <li>
                             <h5>Price:</h5>{{ object.price }}</li>
                         <li>
                             <h5>Description:</h5>{{ object.description }}</li>
-
+                        <li>
+                            <a href="{% url 'product-details' pk=object.pk %}">Details</a>
+                        </li>
                     </ul>
                 {% endfor %}
             </div>

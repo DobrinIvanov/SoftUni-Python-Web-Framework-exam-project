@@ -38,7 +38,6 @@ class Product(models.Model):
 
     image = models.ImageField(
         null=True,
-        upload_to='images'
     )
 
     added = models.DateField(

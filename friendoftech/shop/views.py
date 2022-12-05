@@ -8,12 +8,17 @@ from friendoftech.shop.models import Product
 
 class ProductListView(views.ListView):
     model = Product
-    template_name = 'shop/products-list.html'
+    template_name = 'shop/product-list.html'
 
 
 class ProductDetailsView(views.DetailView):
-    pass
+    model = Product
+    template_name = 'shop/product-details.html'
 
 
 class ProductEditView(views.CreateView):
-    pass
+    ...
+
+
+class AddToCartView(views.View):
+    ...
