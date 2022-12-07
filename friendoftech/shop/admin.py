@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from friendoftech.shop.models import Product, Review, Cart, CartProduct
+from friendoftech.shop.models import Product, Review, Cart #, CartProduct
 
 
 # Register your models here.
@@ -16,9 +16,4 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(CartProduct)
-class CartProductAdmin(admin.ModelAdmin):
     pass

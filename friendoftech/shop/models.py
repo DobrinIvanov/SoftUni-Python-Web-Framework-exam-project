@@ -82,45 +82,45 @@ class Cart(models.Model):
 
     products = models.ManyToManyField(
         Product,
-        related_name='cart',
-        through='CartProduct',
+        # related_name='cart',
+        # through='CartProduct',
     )
 
 
-class CartProduct(models.Model):
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-    )
-
-    cart = models.ForeignKey(
-        Cart,
-        on_delete=models.CASCADE,
-    )
-
-    quantity = models.PositiveIntegerField(
-        default=1,
-    )
-
-    class Meta:
-        unique_together = (("product", "cart"),)
-
-
-# class Order(models.Model):
-#     owner = models.ForeignKey(
-#         AppUser,
+# class CartProduct(models.Model):
+#     product = models.ForeignKey(
+#         Product,
 #         on_delete=models.CASCADE,
 #     )
 #
-#     products = models.ManyToManyField(
-#         Product,
-#         related_name='carts',
-#         through='CartProduct',
+#     cart = models.ForeignKey(
+#         Cart,
+#         on_delete=models.CASCADE,
 #     )
 #
-#     @property
-#     def total_price(self):
-#         return sum([p.price for p in self.products.CartProduct])
+#     quantity = models.PositiveIntegerField(
+#         default=1,
+#     )
+#
+#     class Meta:
+#         unique_together = (("product", "cart"),)
+
+
+class Order(models.Model):
+    appuser = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+    )
+
+    products = models.ManyToManyField(
+        Product,
+        # related_name='carts',
+        # through='CartProduct',
+    )
+
+    @property
+    def total_price(self):
+        return sum([p.price for p in self.products.CartProduct])
 
 
 # TODO Fix relations between Review, Product, AppUser
