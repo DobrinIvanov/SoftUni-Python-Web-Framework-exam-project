@@ -92,14 +92,14 @@ class Cart(models.Model):
 
 # Signal to create Cart when User is registered.
 @receiver(post_save, sender=AppUser)
-def update_cart_signal(sender, instance, created, **kwargs):
+def create_cart_signal(sender, instance, created, **kwargs):
     if created:
         Cart.objects.create(user=instance)
     instance.cart.save()
 
 
 class Order(models.Model):
-    appuser = models.ForeignKey(
+    user = models.ForeignKey(
         AppUser,
         on_delete=models.CASCADE,
     )
@@ -107,12 +107,53 @@ class Order(models.Model):
     products = models.ManyToManyField(
         Product,
         related_name='carts',
-        through='CartProduct',
+        through='OrderProduct',
+    )
+
+    shipping_address = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+    )
+
+    phone_nr = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+
+    is_completed = models.BooleanField(
+        default=False,
     )
 
     @property
     def total_price(self):
         return sum([p.price for p in self.products.CartProduct])
+
+
+# @receiver(post_save, sender=Cart)
+# def create_order_signal(sender, instance, created, **kwargs):
+#     if created:
+#         Order.objects.create(user=instance.user)
+#     instance.order.save()
+
+class OrderProduct(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=1,
+    )
+
+    class Meta:
+        unique_together = ["product", "order"]
 
 
 class CartProduct(models.Model):
@@ -123,11 +164,6 @@ class CartProduct(models.Model):
 
     cart = models.ForeignKey(
         Cart,
-        on_delete=models.CASCADE,
-    )
-
-    order = models.ForeignKey(
-        Order,
         on_delete=models.CASCADE,
     )
 
