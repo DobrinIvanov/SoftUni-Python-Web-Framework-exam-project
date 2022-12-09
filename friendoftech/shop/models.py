@@ -5,6 +5,9 @@ from django.template.defaultfilters import slugify
 from friendoftech.accounts.models import AppUser
 from friendoftech.shop.enums import Category
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 # Create your models here.
 
@@ -82,28 +85,17 @@ class Cart(models.Model):
 
     products = models.ManyToManyField(
         Product,
-        # related_name='cart',
-        # through='CartProduct',
+        related_name='cart',
+        through='CartProduct',
     )
 
 
-# class CartProduct(models.Model):
-#     product = models.ForeignKey(
-#         Product,
-#         on_delete=models.CASCADE,
-#     )
-#
-#     cart = models.ForeignKey(
-#         Cart,
-#         on_delete=models.CASCADE,
-#     )
-#
-#     quantity = models.PositiveIntegerField(
-#         default=1,
-#     )
-#
-#     class Meta:
-#         unique_together = (("product", "cart"),)
+# Signal to create Cart when User is registered.
+@receiver(post_save, sender=AppUser)
+def update_cart_signal(sender, instance, created, **kwargs):
+    if created:
+        Cart.objects.create(user=instance)
+    instance.cart.save()
 
 
 class Order(models.Model):
@@ -114,8 +106,8 @@ class Order(models.Model):
 
     products = models.ManyToManyField(
         Product,
-        # related_name='carts',
-        # through='CartProduct',
+        related_name='carts',
+        through='CartProduct',
     )
 
     @property
@@ -123,7 +115,30 @@ class Order(models.Model):
         return sum([p.price for p in self.products.CartProduct])
 
 
-# TODO Fix relations between Review, Product, AppUser
+class CartProduct(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.CASCADE,
+    )
+
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=1,
+    )
+
+    class Meta:
+        unique_together = (("product", "cart"),)
+
+
 class Review(models.Model):
     MAX_COMMENT_LENGTH = 200
 

@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div id="main"><span class="tm_bottom"></span>
+        <div id="my-content">
+            <div id="product-details-section">
+                <div class="product-details">
+                    <div>
+                        <img src="{% static object.image.url %}" alt="product-image"/>
+                    </div>
+                    <div>
+                        {{ object.name }}
+                    </div>
+                    <div>
+                        {{ object.quantity }}
+                    </div>
+                    <div>
+                        {{ object.price }}
+                    </div>
+                    <div>
+                        {{ object.description }}
+                    </div>
+                    <div>
+                        {{ object.added }}
+                    </div>
+                </div>
+                <div id="product-details-func">
+                    # TODO Change 'add to cart' to Checkout link
+                    <a href="{% url 'add-to-cart' %}">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="cleaner"></div>
+    </div>
+
+{% endblock %}

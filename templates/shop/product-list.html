@@ -11,11 +11,11 @@
                         <li>
                             <h5>Name:</h5>{{ object.name }}</li>
                         <li>
-                            <h5>Price:</h5>{{ object.price }}</li>
+                            <h5>Price:</h5>{{ object.price }} $</li>
                         <li>
                             <h5>Description:</h5>{{ object.description }}</li>
                         <li>
-                            <a href="{% url 'product-details' pk=object.pk %}">Details</a>
+                            <a href="{% url 'product-details' pk=object.pk %}">View Product</a>
                         </li>
                     </ul>
                 {% endfor %}

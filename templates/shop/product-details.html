@@ -3,22 +3,30 @@
 {% block page_content %}
     <div id="main"><span class="tm_bottom"></span>
         <div id="my-content">
-            <div class="profile-edit">
-
-                test
-{#                    <ul>#}
-{#                        <li>#}
-{#                            <img src="{% static object.image.url %}" alt="product-image"/></li>#}
-{#                        <li>#}
-{#                            <h5>Name:</h5>{{ object.name }}</li>#}
-{#                        <li>#}
-{#                            <h5>Price:</h5>{{ object.price }}</li>#}
-{#                        <li>#}
-{#                            <h5>Description:</h5>{{ object.description }}</li>#}
-{#                        <li>#}
-{#                            <a href="{% url 'add-to-cart' pk=object.pk %}">Add to Cart</a>#}
-{#                        </li>#}
-{#                    </ul>#}
+            <div id="product-details-section">
+                <div class="product-details">
+                    <div>
+                        <img src="{% static object.image.url %}" alt="product-image"/>
+                    </div>
+                    <div>
+                        {{ object.name }}
+                    </div>
+                    <div>
+                        {{ object.quantity }}
+                    </div>
+                    <div>
+                        {{ object.price }} $
+                    </div>
+                    <div>
+                        {{ object.description }}
+                    </div>
+                    <div>
+                        {{ object.added }}
+                    </div>
+                </div>
+                <div id="product-details-func">
+                    <a href="{% url 'add_to_cart' product_pk=object.pk user_pk=request.user.pk %}">Add to Cart</a>
+                </div>
             </div>
         </div>
         <div class="cleaner"></div>

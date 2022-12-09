@@ -46,6 +46,7 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        if self.is_superuser:
-            return 'SuperUser'
-        return f'{self.first_name} {self.last_name}'
+        return self.email
+
+
+

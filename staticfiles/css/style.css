@@ -1,11 +1,11 @@
 body {
 	margin: 0px;
 	padding: 0px;
-	color: #b9b9b9;
+	color: #020202;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 12px;
 	line-height: 1.5em; 
-	background-color: #ccc;
+	background-color: #fffefe;
 	background-image: url(../images/body.jpg);
 	background-repeat: repeat;
 }
@@ -22,7 +22,7 @@ ul { margin: 0; padding: 0; }
 ul li { margin: 0; padding: 0; }
 
 h1, h2, h3, h4, h5, h6 { color: #000; }
-h1 { font-size: 30px; font-weight: normal; margin: 0 0 20px 0; padding: 5px 0; color: #9b9b9b; }
+h1 { font-size: 30px; font-weight: normal; margin: 0 0 20px 0; padding: 5px 0; color: #ffffff; }
 h2 { font-size: 24px; font-weight: normal; margin: 0 0 20px 0; padding: 10px 0 15px 0; color: #fff; }
 h3 { font-size: 20px; font-weight: normal; margin: 0 0 15px 0; padding: 0; padding: 0 0 10px 0; }
 h4 { font-size: 18px; margin: 0 0 20px 0; padding: 0 0 10px 0; ; }
@@ -94,7 +94,7 @@ a.continue { color: #F00; font-weight: bold; text-decoration: none; }
 }
 
 #newsletter_box form { width: 260px; padding: 0; margin: 0; }
-#newsletter_box form .newsletter_email { color: #333; width: 180px; height: 22px; border: 1px solid #333; background: none; padding: 0 5px; }
+#newsletter_box form .newsletter_email { color: #ffffff; width: 180px; height: 22px; border: 1px solid #ffffff; background: none; padding: 0 5px; }
 #newsletter_box form #submit { width: 63px; height:23px; background: url(../images/subscribe_btn.png) no-repeat; border: none; cursor: pointer; margin-top:15px;}
 
 /* menu */

@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import request
 from django.urls import reverse_lazy
@@ -21,6 +21,11 @@ class SignUpView(views.CreateView):
         login(self.request, self.object)
         return result
 
+    # def form_valid(self, form):
+    #     """If the form is valid, save the associated model."""
+    #     self.object = form.save()
+    #     return super().form_valid(form)
+
 
 class SignInView(auth_views.LoginView):
     template_name = 'accounts/sign-in.html'
@@ -29,14 +34,15 @@ class SignInView(auth_views.LoginView):
         return reverse_lazy('index')
 
 
-class SignOutView(auth_views.LogoutView):
+class SignOutView(auth_views.LogoutView, LoginRequiredMixin):
     template_name = 'accounts/sign-out.html'
     success_url = reverse_lazy('index')
 
 
-class ProfileDetailsView(views.DetailView):
+class ProfileDetailsView(views.DetailView, LoginRequiredMixin):
     model = UserModel
     template_name = 'accounts/profile-details.html'
+    raise_exception = False
 
 
 class ProfileEditView(views.UpdateView):

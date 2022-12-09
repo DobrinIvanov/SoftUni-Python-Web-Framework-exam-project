@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div id="main"><span class="tm_bottom"></span>
+        <div id="my-content">
+            <div id="product-details-section">
+                <div class="product-details">
+                    <div>
+                        <img src="{% static object.image.url %}" alt="product-image"/>
+                    </div>
+                    <div>
+                        {{ object.name }}
+                    </div>
+                    <div>
+                        {{ object.quantity }}
+                    </div>
+                    <div>
+                        {{ object.price }}
+                    </div>
+                    <div>
+                        {{ object.description }}
+                    </div>
+                    <div>
+                        {{ object.added }}
+                    </div>
+                </div>
+                <div id="product-details-func">
+                    <a href="{% url 'add-to-cart' %}">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="cleaner"></div>
+    </div>
+
+{% endblock %}
