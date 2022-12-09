@@ -1,5 +1,5 @@
 # My Files:
-.staticfiles/css/savedcss.css
+staticfiles/css/savedcss.css
 
 # Django #
 *.log
