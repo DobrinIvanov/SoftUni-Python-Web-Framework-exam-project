@@ -1,11 +1,11 @@
 # from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
-from django.http import request
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views, login, get_user_model
 from django.views import generic as views
 from friendoftech.accounts.forms import AppUserCreationForm
+
 
 UserModel = get_user_model()
 # Create your views here.
@@ -58,4 +58,5 @@ class ChangePasswordView(auth_views.PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'accounts/profile-password-update.html'
     success_url = reverse_lazy('index')
+
 

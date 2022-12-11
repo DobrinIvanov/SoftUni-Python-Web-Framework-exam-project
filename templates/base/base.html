@@ -1,52 +1,58 @@
 {% load static %}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Frnd of Tch</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
-<!--
-<script language="javascript" type="text/javascript">
-
-function clearText(field) {
-    if (field.defaultValue == field.value) field.value = '';
-    else if (field.value == '') field.value = field.defaultValue;
-}
-
-</script> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Index</title>
 </head>
 <body>
-<div id="header">
-    <div id="site_title"> <a href="{% url 'index' %}"></a> </div>
-    <!-- Insert Newsletter here -->
-  <div class="cleaner"></div>
-</div>
-<!-- end of header -->
-<div id="menu_wrapper">
-  <div id="menu">
-    <ul>
-      <!-- One can place 'class="current"' so the active page shows with a different BG in the menu -->
-      <li><a href="{% url 'index' %}"><span></span>Home</a></li>
-      <li><a href="{% url 'product-list' %}"><span></span>Shop</a></li>
-      <li><a href="{% url 'contact' %}"><span></span>Contact Us</a></li>
-      <li><a href="{% url 'news' %}"><span></span>News</a></li>
-      <li><a href="{% url 'about' %}"><span></span>About</a></li>
-    </ul>
-  </div>
-</div>
+    <div id="container">
+        <div id="header">
+            <div id="top-header-section">
+                <div id="logo">
+                    <a href="{% url 'index' %}"><img src="{% static 'images/new_logo.png' %}" alt="Friend of Technology"/></a>
+                </div>
+                <!-- if user is authenticated  -->
+                {% if request.user.is_authenticated %}
+                <div class="userSection">
+                    <ul class="userSectionLists">
+                        <!-- Configure URLs here -->
+                        <li><a href="{% url 'profile-details' pk=request.user.pk %}">My Profile</a></li> / <li><a href="{% url 'sign-out' %}">Logout</a></li>
+                    </ul>
+                    <ul class="userSectionLists">
+                        <li><a href="{% url 'cart' pk=request.user.pk %}">Shopping Cart (0)</a></li>
+                    </ul>
+                </div>
+
+                <!-- else -->
+                {% else %}
+                <div class="userSection">
+                    <ul>
+                        <li><a href="{% url 'sign-up' %}">Sign up!</a></li>  /  <li><a href="{% url 'sign-in' %}">Sign in!</a></li>
+                    </ul>
+                </div>
+                <!-- end if -->
+                {% endif %}
+            </div>
+            <div id="menu">
+                    <ul>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'product-list' %}">Shop</a></li>
+                        <li><a href="{% url 'news' %}">News</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+            </div>
+        </div>
 <!-- end of menu -->
 {% block page_content %}
     <!-- Extending block -->
 {% endblock %}
-<div id="footer">
-  <ul class="footer_menu">
-    <li class="first"><a href="{% url 'index' %}">Home</a></li>
-    <li><a href="{% url 'product-list' %}">Shop</a></li>
-    <li><a href="{% url 'contact' %}">Contact Us</a></li>
-    <li><a href="{% url 'news' %}">News</a></li>
-    <li><a href="{% url 'about' %}">About</a></li>
-  </ul>
-  Copyright &copy; 2022 <a href="{% url 'index' %}">Friend of Tech</a> | Designed by FriendofTech</div>
+        <div id="footer"></div>
+    </div>
 </body>
 </html>

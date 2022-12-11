@@ -1,12 +1,27 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load filters %}
 {% block page_content %}
-    <div id="main"><span class="tm_bottom"></span>
-        <div id="my-content">
-            {{ product.name }}
-            {{ user.email }}
+    <div id="main">
+        <div id="innerMain">
+            <section id="cart">
+                <div class="title">Shopping Cart</div>
+                <div id="products">
+                    {% for product in products %}
+                        <div class="product">
+                            <div class="product-name">{{ product.name }}</div>
+                            <div class="product-price">{{ product.price }}$</div>
+                            <div class="product-quantity">{{ quantities_per_name|get_dict_value:product.name }}</div>
+                        </div>
+                    {% endfor %}
+                    <div class="cart-btn"><a href="{% url 'checkout' %}">Checkout</a></div>
+                    <div class="cart-btn">Remove</div>
+                </div>
+                <div>
+
+                </div>
+            </section>
         </div>
-        <div class="cleaner"></div>
     </div>
 
 {% endblock %}

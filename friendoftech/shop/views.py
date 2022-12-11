@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
-
-from friendoftech.shop.models import Product, Cart, CartProduct
+from django.contrib.auth.mixins import LoginRequiredMixin
+from friendoftech.shop.models import Product, CartProduct, Cart
 
 UserModel = get_user_model()
 
@@ -18,24 +18,6 @@ class ProductListView(views.ListView):
 class ProductDetailsView(views.DetailView):
     model = Product
     template_name = 'shop/product-details.html'
-
-
-class CartView(views.TemplateView):
-    template_name = 'shop/cart.html'
-
-    def get_context_data(self, **kwargs):
-        super().get_context_data(**kwargs)
-
-
-def add_to_cart_old(request, product_pk, user_pk):
-    product = Product.objects.filter(pk=product_pk).get()
-    user = UserModel.objects.filter(pk=user_pk).get()
-
-    context = {
-        'product': product,
-        'user': user,
-    }
-    return render(request, 'shop/cart.html', context)
 
 
 def add_to_cart(request, product_pk, user_pk):
@@ -55,3 +37,29 @@ def add_to_cart(request, product_pk, user_pk):
 def checkout(request):
     context = {}
     return render(request, 'shop/checkout.html', context)
+
+
+class CartView(views.TemplateView, LoginRequiredMixin):
+    template_name = 'shop/cart.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        # self.cart = Cart.objects.filter(user_id=request.user.pk)
+        self.cartproducts = CartProduct.objects.filter(cart__user_id=request.user.pk)
+        self.products = list()
+        self.quantitie_per_name = {}
+        for cp in self.cartproducts:
+            curr_product = Product.objects.filter(id=cp.product_id).get()
+            self.products.append(curr_product)
+            self.quantitie_per_name[curr_product.name] = cp.quantity
+        return super(CartView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = self.products
+        context['quantities_per_name'] = self.quantitie_per_name
+        return context
+
+
+class CheckoutView(views.TemplateView):
+    template_name = 'shop/checkout.html'
+    #TODO
