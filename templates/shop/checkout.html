@@ -1,36 +1,26 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block page_content %}
-    <div id="main"><span class="tm_bottom"></span>
-        <div id="my-content">
-            <div id="product-details-section">
-                <div class="product-details">
-                    <div>
-                        <img src="{% static object.image.url %}" alt="product-image"/>
-                    </div>
-                    <div>
-                        {{ object.name }}
-                    </div>
-                    <div>
-                        {{ object.quantity }}
-                    </div>
-                    <div>
-                        {{ object.price }}
-                    </div>
-                    <div>
-                        {{ object.description }}
-                    </div>
-                    <div>
-                        {{ object.added }}
-                    </div>
+    <div id="main">
+        <div id="innerMain">
+            <section id="cart">
+                <div class="title">Shopping Cart</div>
+                <div id="products">
+                    {% for product in products %}
+                        <div class="product">
+                            <div class="product-name">{{ product.name }}</div>
+                            <div class="product-price">{{ product.price }}$</div>
+                            <div class="product-quantity">Something</div>
+                        </div>
+                    {% endfor %}
+                    <div class="cart-btn"><a href="{% url 'checkout' pk=request.user.pk %}">Checkout</a></div>
+                    <div class="cart-btn">Remove</div>
                 </div>
-                <div id="product-details-func">
-                    # TODO Change 'add to cart' to Checkout link
-                    <a href="{% url 'add-to-cart' %}">Add to Cart</a>
+                <div>
+
                 </div>
-            </div>
+            </section>
         </div>
-        <div class="cleaner"></div>
     </div>
 
 {% endblock %}

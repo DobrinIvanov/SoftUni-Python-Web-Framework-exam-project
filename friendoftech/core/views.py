@@ -4,6 +4,8 @@ from django.views import generic as views
 from friendoftech.core.forms import ContactForm
 from django.core.mail import send_mail
 
+from friendoftech.core.models import Article
+
 
 # Create your views here.
 
@@ -24,12 +26,9 @@ class ContactUsView(views.FormView):
 
 
 class NewsView(views.ListView):
-    pass
+    model = Article
+    template_name = 'core/news.html'
 
 
 class AboutUsView(views.TemplateView):
-    pass
-
-    # def form_valid(self, form_class):
-    #     form_class.send_mail()
-    #     return super().form_valid(form=form_class)
+    template_name = 'core/about.html'

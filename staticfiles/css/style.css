@@ -76,7 +76,7 @@ body {
     font-size: 18px;
     background: #524f4a;
     border: 1px solid black;
-    border-radius: 1px;
+    border-radius: 5px;
     cursor: pointer;
     padding: 12px 2px;
     text-align: center;
@@ -95,17 +95,21 @@ body {
     width: 100%;
     border-radius: 5px;
     padding-top: 15px;
+    min-height: 200px;
+    overflow: hidden;
 }
 
 #innerMain {
     background: black;
     width: 83%;
     margin: 0 auto;
+    min-height: 200px;
+    overflow: hidden;
+    padding: 50px 50px;
 }
 #footer {
     background-color: rgba(82, 80, 80, 0.2);
     width: 100%;
-    height: 200px;
     border-radius: 5px;
 }
 
@@ -117,8 +121,11 @@ body {
 
 #cart {
     width: 100%;
-    height: 150px;
-    background: rgba(82, 80, 80, 1);
+    background: rgba(120, 80, 80, 0.8);
+    min-height: 200px;
+    overflow: hidden;
+    padding: 50px 50px;
+    box-sizing: border-box;
 }
 
 .title {
@@ -132,4 +139,27 @@ body {
     margin: 0 auto;
     background: rgba(255, 65, 71, 0.5);
     border: 1px solid black;
+}
+
+#products {
+    margin: 0 auto;
+    background: rgba(240, 170, 71, 0.5);
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.product-name {
+    display: inline-block;
+}
+
+.product-price {
+    display:inline-block;
+}
+
+.product-quantity {
+    display: inline-block;
+ }
+
+.cart-add-remove {
+    display: inline-block;
 }
