@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth.mixins import LoginRequiredMixin
-from friendoftech.shop.models import Product, CartProduct, Cart
+
+from friendoftech.shop.functions import get_products_and_quantities_per_user_cart
+from friendoftech.shop.models import Product, CartProduct, Cart, Order, OrderProduct
 
 UserModel = get_user_model()
 
@@ -43,21 +45,33 @@ def checkout(request):
 class CartView(views.TemplateView, LoginRequiredMixin):
     template_name = 'shop/cart.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        # self.cart = Cart.objects.filter(user_id=request.user.pk)
-        self.cartproducts = CartProduct.objects.filter(cart__user_id=request.user.pk)
-        self.products = list()
-        self.quantitie_per_name = {}
-        for cp in self.cartproducts:
-            curr_product = Product.objects.filter(id=cp.product_id).get()
-            self.products.append(curr_product)
-            self.quantitie_per_name[curr_product.name] = cp.quantity
-        return super(CartView, self).dispatch(request, *args, **kwargs)
+    # If you want to pass parameters to other methods by saving them to the class
+    # def dispatch(self, request, *args, **kwargs):
+    #     # self.cart = Cart.objects.filter(user_id=request.user.pk)
+    #     self.cartproducts = CartProduct.objects.filter(cart__user_id=request.user.pk)
+    #     self.products = list()
+    #     self.quantitie_per_name = {}
+    #     for cp in self.cartproducts:
+    #         curr_product = Product.objects.filter(id=cp.product_id).get()
+    #         self.products.append(curr_product)
+    #         self.quantitie_per_name[curr_product.name] = cp.quantity
+    #     return super(CartView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        # cartproducts = CartProduct.objects.filter(cart__user_id=self.request.user.pk)
+        # products = list()
+        # quantities_per_name = {}
+        # for cp in cartproducts:
+        #     curr_product = Product.objects.filter(id=cp.product_id).get()
+        #     products.append(curr_product)
+        #     quantities_per_name[curr_product.name] = cp.quantity
+
+        # Returns list(products) and dict(quantities_per_name)
+        products, quantities_per_name = get_products_and_quantities_per_user_cart(self.request.user.pk)
+
         context = super().get_context_data(**kwargs)
-        context['products'] = self.products
-        context['quantities_per_name'] = self.quantitie_per_name
+        context['products'] = products
+        context['quantities_per_name'] = quantities_per_name
         return context
 
 
@@ -65,14 +79,21 @@ class CheckoutView(views.TemplateView):
     template_name = 'shop/checkout.html'
 
     def dispatch(self, request, *args, **kwargs):
-        return super(CheckoutView, self).dispatch(request, *args, **kwargs)
+        # Create order and orderproducts upon checkout request
+        products, quantities_per_name = get_products_and_quantities_per_user_cart(request.user.pk)
+        new_order = Order(user=UserModel.objects.filter(pk=request.user.pk).get())
+        new_order.save()
+        for product in products:
+            new_orderproduct = OrderProduct(order=new_order, quantity=quantities_per_name[product.name], product=product)
+            new_orderproduct.save()
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['book_list'] = Book.objects.all()
+        context['book_list'] = 'Book.objects.all()'
         return context
+
 
 def remove_cartproduct_view(request, user_pk, cartproduct_pk):
     return redirect('index')
