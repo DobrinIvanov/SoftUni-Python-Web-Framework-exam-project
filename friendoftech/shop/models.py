@@ -122,20 +122,19 @@ class Order(models.Model):
         blank=True,
     )
 
+    comment = models.TextField(
+        null=True,
+        blank=True,
+    )
+
     is_completed = models.BooleanField(
         default=False,
     )
 
     @property
     def total_price(self):
-        return sum([p.price for p in self.products.CartProduct])
+        return sum([p.product.price for p in self.orderproduct_set])
 
-
-# @receiver(post_save, sender=Cart)
-# def create_order_signal(sender, instance, created, **kwargs):
-#     if created:
-#         Order.objects.create(user=instance.user)
-#     instance.order.save()
 
 class OrderProduct(models.Model):
     product = models.ForeignKey(

@@ -83,21 +83,33 @@ class CheckoutView(views.TemplateView):
         products, quantities_per_name = get_products_and_quantities_per_user_cart(request.user.pk)
         new_order = Order(user=UserModel.objects.filter(pk=request.user.pk).get())
         new_order.save()
+        self.orderproducts = list()
         for product in products:
             new_orderproduct = OrderProduct(order=new_order, quantity=quantities_per_name[product.name], product=product)
             new_orderproduct.save()
+            self.orderproducts.append(new_orderproduct)
+            self.order = new_order
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['book_list'] = 'Book.objects.all()'
+        context['orderproducts'] = self.orderproducts
+        context['order'] = self.order
         return context
 
 
-def remove_cartproduct_view(request, user_pk, cartproduct_pk):
+def add_cart_view(request, user_pk, cartproduct_pk):
     return redirect('index')
 
 
-def add_cartproduct_view(request, user_pk, cartproduct_pk):
+def remove_cart_view(request, user_pk, cartproduct_pk):
     return redirect('index')
+
+
+def edit_order_cart_redirect(request, order, ):
+
+    return redirect('cart')
+
+
+class CompleteOrderView(views.TemplateView):
+    ...

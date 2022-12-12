@@ -4,7 +4,7 @@
 {% block page_content %}
     <div id="main">
         <div id="innerMain">
-            <section id="cart">
+            <section id="cart-order">
                 <div class="title">Shopping Cart</div>
                 <div id="products">
                     {% for product in products %}
@@ -17,13 +17,13 @@
                             </div>
                             <div class="product-quantity">
                                 <div class='cart-add-remove'><img src="{% static 'media/plus-icon-16.png' %}" alt="add"/></div>
-                                {{ quantities_per_name|get_dict_value:product.name }}
+                                <span>{{ quantities_per_name|get_dict_value:product.name }}</span>
                                 <div class="cart-add-remove"><img src="{% static 'media/minus-icon-16.png' %}" alt="remove"/></div>
                             </div>
                         </div>
                     {% endfor %}
                     <div class="cart-btn"><a href="{% url 'checkout' pk=request.user.pk %}">Checkout</a></div>
-                    <div class="cart-btn">Remove</div>
+                    <div class="cart-btn"><a href="{% url 'product-list' %}">Back to the shop</a></div>
                 </div>
                 <div>
 

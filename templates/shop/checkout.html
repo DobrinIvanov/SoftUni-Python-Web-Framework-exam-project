@@ -3,19 +3,22 @@
 {% block page_content %}
     <div id="main">
         <div id="innerMain">
-            <section id="cart">
+            <section id="cart-order">
                 <div class="title">Shopping Cart</div>
                 <div id="products">
-                    {% for product in products %}
+                    {% for op in orderproducts %}
                         <div class="product">
-                            <div class="product-name">{{ product.name }}</div>
-                            <div class="product-price">{{ product.price }}$</div>
-                            <div class="product-quantity">Something</div>
+                            <span class="checkout-product-name">{{ op.product.name }}</span>
+                            <span class="checkout-product-quantity">{{ op.quantity }}$</span>
                         </div>
                     {% endfor %}
-                    <div class="cart-btn"><a href="{% url 'checkout' pk=request.user.pk %}">Checkout</a></div>
-                    <div class="cart-btn">Remove</div>
+                    <div class="checkout-price">
+                        Total price: {{ order.total_price }}
+                    </div>
+                    <div class="cart-btn"><a href="{% url 'confirm-order' pk=request.user.pk %}">Confirm & Submit order</a></div>
+                    <div class="cart-btn"><a href="{% url 'edit-order-cart-redirect' %}">Edit Order</a></div>
                 </div>
+                <form></form>
                 <div>
 
                 </div>
