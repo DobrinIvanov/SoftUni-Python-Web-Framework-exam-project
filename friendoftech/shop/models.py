@@ -131,6 +131,10 @@ class Order(models.Model):
         default=False,
     )
 
+    is_submited = models.BooleanField(
+        default=False,
+    )
+
     @property
     def total_price(self):
         return sum([p.product.price for p in self.orderproduct_set])

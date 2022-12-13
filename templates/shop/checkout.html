@@ -15,8 +15,8 @@
                     <div class="checkout-price">
                         Total price: {{ order.total_price }}
                     </div>
-                    <div class="cart-btn"><a href="{% url 'confirm-order' pk=request.user.pk %}">Confirm & Submit order</a></div>
-                    <div class="cart-btn"><a href="{% url 'edit-order-cart-redirect' %}">Edit Order</a></div>
+                    <div class="cart-btn"><a href="{% url 'complete-order' pk=request.user.pk orderid=order.id %}">Confirm & Submit order</a></div>
+                    <div class="cart-btn"><a href="{% url 'edit-order-cart-redirect' %}">Edit order</a></div>
                 </div>
                 <form></form>
                 <div>

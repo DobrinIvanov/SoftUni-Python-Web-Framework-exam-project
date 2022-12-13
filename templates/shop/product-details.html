@@ -24,8 +24,8 @@
                         {{ object.added }}
                     </div>
                 </div>
-                <div id="product-details-func">
-                    <a href="{% url 'add_to_cart' product_pk=object.pk user_pk=request.user.pk %}">Add to Cart</a>
+                <div id="product-details-add-to-cart">
+                    <a href="{% url 'add-to-cart' pk=request.user.pk product_pk=object.pk %}">Add to Cart</a>
                 </div>
             </div>
         </div>

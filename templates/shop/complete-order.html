@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load filters %}
+{% block page_content %}
+    <div id="main">
+        <div id="innerMain">
+            <section id="complete-order">
+                <div id="thanks-msg">
+                    Thank you for your order!
+                </div>
+                <div id="order-nr">
+                    Order Nr: #{{ order.id }}
+                </div>
+                <div>
+                    Feel free to reach us for any questions regarding your order at
+                    <span class="email">orders@friendofte.ch</span> !
+                </div>
+            </section>
+        </div>
+    </div>
+
+{% endblock %}

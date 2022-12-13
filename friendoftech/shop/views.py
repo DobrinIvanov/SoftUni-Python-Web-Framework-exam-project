@@ -23,9 +23,9 @@ class ProductDetailsView(views.DetailView):
     template_name = 'shop/product-details.html'
 
 
-def add_to_cart(request, product_pk, user_pk):
+def add_to_cart(request, pk, product_pk):
     product = Product.objects.filter(pk=product_pk).get()
-    current_cart = Cart.objects.filter(user_id__id=user_pk).get()
+    current_cart = Cart.objects.filter(user_id__id=pk).get()
     products_added = current_cart.cartproduct_set.all()
     if product.pk in [p.product_id for p in products_added]:
         existing_cartproduct = products_added.filter(product_id=product.pk).get()
@@ -34,12 +34,7 @@ def add_to_cart(request, product_pk, user_pk):
     else:
         new_product = CartProduct(product=product, cart=current_cart)
         new_product.save()
-    return redirect(reverse_lazy('product-details', kwargs={'pk': product.pk}))
-
-
-def checkout(request):
-    context = {}
-    return render(request, 'shop/checkout.html', context)
+    return redirect(reverse_lazy('product-details', kwargs={'pk': product_pk}))
 
 
 class CartView(views.TemplateView, LoginRequiredMixin):
@@ -58,6 +53,7 @@ class CartView(views.TemplateView, LoginRequiredMixin):
     #     return super(CartView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+
         # cartproducts = CartProduct.objects.filter(cart__user_id=self.request.user.pk)
         # products = list()
         # quantities_per_name = {}
@@ -67,8 +63,8 @@ class CartView(views.TemplateView, LoginRequiredMixin):
         #     quantities_per_name[curr_product.name] = cp.quantity
 
         # Returns list(products) and dict(quantities_per_name)
-        products, quantities_per_name = get_products_and_quantities_per_user_cart(self.request.user.pk)
 
+        products, quantities_per_name = get_products_and_quantities_per_user_cart(self.request.user.pk)
         context = super().get_context_data(**kwargs)
         context['products'] = products
         context['quantities_per_name'] = quantities_per_name
@@ -79,17 +75,26 @@ class CheckoutView(views.TemplateView):
     template_name = 'shop/checkout.html'
 
     def dispatch(self, request, *args, **kwargs):
+
         # Create order and orderproducts upon checkout request
         products, quantities_per_name = get_products_and_quantities_per_user_cart(request.user.pk)
+        if not products:
+            return redirect('index')
         new_order = Order(user=UserModel.objects.filter(pk=request.user.pk).get())
         new_order.save()
+
         self.orderproducts = list()
         for product in products:
-            new_orderproduct = OrderProduct(order=new_order, quantity=quantities_per_name[product.name], product=product)
+            new_orderproduct = OrderProduct(
+                order=new_order,
+                quantity=quantities_per_name[product.name],
+                product=product
+            )
             new_orderproduct.save()
             self.orderproducts.append(new_orderproduct)
             self.order = new_order
-        return super().dispatch(request, *args, **kwargs)
+
+        return super(CheckoutView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -98,18 +103,41 @@ class CheckoutView(views.TemplateView):
         return context
 
 
-def add_cart_view(request, user_pk, cartproduct_pk):
-    return redirect('index')
+def add_cartproduct_view(request, pk, pid):
+    cart_id = Cart.objects.filter(user_id=pk).get().pk
+    cartproduct = CartProduct.objects.filter(cart_id=cart_id).filter(product_id=pid).get()
+    cartproduct.quantity += 1
+    cartproduct.save()
+    return redirect('cart', pk=pk)
 
 
-def remove_cart_view(request, user_pk, cartproduct_pk):
-    return redirect('index')
+def remove_cartproduct_view(request, pk, pid):
+    cart_id = Cart.objects.filter(user_id=pk).get().pk
+    cartproduct = CartProduct.objects.filter(cart_id=cart_id, product_id=pid).get()
+    if cartproduct.quantity == 1:
+        cartproduct.delete()
+    else:
+        cartproduct.quantity -= 1
+        cartproduct.save()
+    return redirect('cart', pk=pk)
 
 
-def edit_order_cart_redirect(request, order, ):
-
-    return redirect('cart')
+def edit_order_cart_redirect(request, userpk, orderid):
+    Order.objects.filter(pk=orderid).get().delete()
+    return redirect('cart', pk=userpk)
 
 
 class CompleteOrderView(views.TemplateView):
-    ...
+    template_name = 'shop/complete-order.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        # userpk = self.kwargs['pk']
+        self.orderid = self.kwargs['orderid']
+        curr_order = Order.objects.filter(id=self.orderid).get()
+        curr_order.is_submited = True
+        return super(CompleteOrderView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['orderid'] = self.orderid
+        return context

@@ -7,6 +7,7 @@
             <section id="cart-order">
                 <div class="title">Shopping Cart</div>
                 <div id="products">
+                {% if products %}
                     {% for product in products %}
                         <div class="product">
                             <div class="product-name">
@@ -16,13 +17,22 @@
                                 {{ product.price }}$
                             </div>
                             <div class="product-quantity">
-                                <div class='cart-add-remove'><img src="{% static 'media/plus-icon-16.png' %}" alt="add"/></div>
+                                <div class='cart-add-remove'><a
+                                        href="{% url 'add-cart-product' pk=request.user.pk pid=product.id %}"><img
+                                        src="{% static 'media/plus-icon-16.png' %}" alt="add"/></a></div>
                                 <span>{{ quantities_per_name|get_dict_value:product.name }}</span>
-                                <div class="cart-add-remove"><img src="{% static 'media/minus-icon-16.png' %}" alt="remove"/></div>
+                                <div class="cart-add-remove"><a
+                                        href="{% url 'remove-cart-product' pk=request.user.pk pid=product.id %}"><img
+                                        src="{% static 'media/minus-icon-16.png' %}" alt="remove"/></a></div>
                             </div>
                         </div>
                     {% endfor %}
-                    <div class="cart-btn"><a href="{% url 'checkout' pk=request.user.pk %}">Checkout</a></div>
+                    {% else %}
+                    <div><span>Your shopping cart is empty!</span></div>
+                {% endif %}
+                    {% if products %}
+                        <div class="cart-btn"><a href="{% url 'checkout' pk=request.user.pk %}">Checkout</a></div>
+                    {% endif %}
                     <div class="cart-btn"><a href="{% url 'product-list' %}">Back to the shop</a></div>
                 </div>
                 <div>

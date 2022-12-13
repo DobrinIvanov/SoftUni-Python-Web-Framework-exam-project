@@ -22,7 +22,16 @@ class Article(models.Model):
         auto_now_add=True,
     )
 
-    content = models.TextField()
+    summary = models.CharField(
+        max_length=75,
+        null=False,
+        blank=False,
+    )
+
+    content = models.TextField(
+        null=False,
+        blank=False,
+    )
 
     # TODO work on images, how they are stored, etc.
     image = models.ImageField()
