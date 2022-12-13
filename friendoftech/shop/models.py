@@ -13,7 +13,7 @@ from django.dispatch import receiver
 
 
 class Product(models.Model):
-    MAX_PRODUCT_NAME_LENGTH = 60
+    MAX_PRODUCT_NAME_LENGTH = 150
 
     name = models.CharField(
         max_length=MAX_PRODUCT_NAME_LENGTH,

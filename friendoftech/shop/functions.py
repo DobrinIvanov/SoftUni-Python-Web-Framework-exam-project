@@ -20,3 +20,9 @@ def convert_cartproduct_to_orderproduct(cartproducts_queryset):
     for each_cp in cartproducts:
         new_orderproduct = OrderProduct(user=UserModel.filter(pk=each_cp.user_id))
         new_orderproduct.save()
+
+
+def get_popular_items():
+    products = Product.objects.all().order_by()
+    popular_products = products.order_by('-sold')[:3]
+    return popular_products

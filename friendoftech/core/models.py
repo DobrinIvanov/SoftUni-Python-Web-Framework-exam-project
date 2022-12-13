@@ -34,7 +34,9 @@ class Article(models.Model):
     )
 
     # TODO work on images, how they are stored, etc.
-    image = models.ImageField()
+    image = models.ImageField(
+        null=True,
+    )
 
     def __str__(self):
         return f'{self.title}'

@@ -19,11 +19,11 @@
                             <div class="product-quantity">
                                 <div class='cart-add-remove'><a
                                         href="{% url 'add-cart-product' pk=request.user.pk pid=product.id %}"><img
-                                        src="{% static 'media/plus-icon-16.png' %}" alt="add"/></a></div>
+                                        src="{% static 'images/plus-icon-16.png' %}" alt="add"/></a></div>
                                 <span>{{ quantities_per_name|get_dict_value:product.name }}</span>
                                 <div class="cart-add-remove"><a
                                         href="{% url 'remove-cart-product' pk=request.user.pk pid=product.id %}"><img
-                                        src="{% static 'media/minus-icon-16.png' %}" alt="remove"/></a></div>
+                                        src="{% static 'images/minus-icon-16.png' %}" alt="remove"/></a></div>
                             </div>
                         </div>
                     {% endfor %}
@@ -43,3 +43,7 @@
     </div>
 
 {% endblock %}
+
+
+
+
