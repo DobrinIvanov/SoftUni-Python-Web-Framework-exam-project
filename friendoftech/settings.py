@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'django-insecure-^c9+s5jq++ru2ppug-ovm3p2)7#=gxx9ejt#men+_!m0q5%*=b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'friendoftech.core.context_processors.access_cart_items_count',
             ],
         },
     },

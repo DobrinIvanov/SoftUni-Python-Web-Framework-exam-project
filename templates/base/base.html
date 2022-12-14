@@ -24,7 +24,7 @@
                         <li><a href="{% url 'profile-details' pk=request.user.pk %}">My Profile</a></li> / <li><a href="{% url 'sign-out' %}">Logout</a></li>
                     </ul>
                     <ul class="userSectionLists">
-                        <li><a href="{% url 'cart' pk=request.user.pk %}">Shopping Cart (0)</a></li>
+                        <li><a href="{% url 'cart' pk=request.user.pk %}">Shopping Cart ({{ cart_items }})</a></li>
                     </ul>
                 </div>
 

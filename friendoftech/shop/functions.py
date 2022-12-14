@@ -4,6 +4,12 @@ from friendoftech.shop.models import CartProduct, Product, OrderProduct
 UserModel = get_user_model()
 
 
+def get_total_items_per_user_cart(user_pk):
+    _, quantities_per_name = get_products_and_quantities_per_user_cart(user_pk)
+    total_count = sum(quantities_per_name.values())
+    return total_count
+
+
 def get_products_and_quantities_per_user_cart(user_pk):
     cartproducts = CartProduct.objects.filter(cart__user_id=user_pk)
     products = list()
@@ -22,7 +28,7 @@ def convert_cartproduct_to_orderproduct(cartproducts_queryset):
         new_orderproduct.save()
 
 
-def get_popular_items():
+def get_popular_products():
     products = Product.objects.all().order_by()
     popular_products = products.order_by('-sold')[:3]
     return popular_products

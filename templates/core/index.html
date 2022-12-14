@@ -1,17 +1,51 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block page_content %}
     <div id="main">
-        <div id="innerMain">
-            <section id="recommendedProducts">
-                <div id="left"></div>
-                <div id="mid"></div>
-                <div id="right"></div>
-            </section>
-            <section id="searchBar">
-            </section>
-            <section id="latestNews">
-            </section>
+        <div id="home-inner">
+            <div id="recommendedProducts" class="flex-child home-inner-section">
+                <div class="flex-child flex-parent">
+                    <div class="flex-child">Best sellers</div>
+                    <div class="flex-child"><a href="{% url 'product-list' %}">Visit Shop</a></div>
+                </div>
+                <div class="flex-child flex-parent">
+                    {% for product in popular_products %}
+                        <div class="product-internal">
+                            <div class="r-product-image">
+                                <img src="{% static product.image.url %}" alt="product-image"/>
+                            </div>
+                            <div class="r-product-details">
+                                <div class="r-product-name">
+                                    {{ product.name }}
+                                </div>
+                                <div class="r-product-price">
+                                    {{ product.price }} $
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div id="search-bar" class="flex-child home-inner-section">
+                <div>
+                    Latest articles
+                </div>
+                <div>
+                    <!-- TODO: Add articles in here -->
+                    Article Article Article
+                </div>
+            </div>
+            <div id="latest-news" class="flex-child home-inner-section">
+                <div>
+                    Search box
+                </div>
+                <div>
+                    <!-- TODO: Implement the search box -->
+                    Actual Search Box
+                </div>
+            </div>
         </div>
     </div>
 

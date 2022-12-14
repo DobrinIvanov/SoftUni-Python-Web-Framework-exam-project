@@ -1,13 +1,17 @@
 # from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.views import generic as views
 from friendoftech.core.forms import ContactForm
 from django.core.mail import send_mail
 
 from friendoftech.core.models import Article
+from friendoftech.shop.functions import get_popular_products, get_total_items_per_user_cart
 
 
+UserModel = get_user_model()
 # Create your views here.
+
 
 class IndexView(views.TemplateView):
     template_name = 'core/index.html'
@@ -15,8 +19,10 @@ class IndexView(views.TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
 
-        # TODO Recommended Items
-        context_data['recommended_products'] = ...
+        popular_products = get_popular_products()
+
+        context_data['popular_products'] = popular_products
+        return context_data
 
 
 class ContactUsView(views.FormView):
