@@ -1,5 +1,7 @@
 from django import forms
 
+from friendoftech.shop.models import Review
+
 
 class CheckoutForm(forms.Form):
     names = forms.CharField(
@@ -15,3 +17,11 @@ class CheckoutForm(forms.Form):
     )
 
     comment = forms.Textarea()
+
+
+class WriteReviewForm(forms.ModelForm):
+    model = Review
+
+    class Meta:
+        model = Review
+        fields = ('is_positive', 'comment')

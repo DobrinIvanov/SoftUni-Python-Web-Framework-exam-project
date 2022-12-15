@@ -6,10 +6,6 @@
         <div id="home-inner">
             <div id="recommendedProducts" class="flex-child home-inner-section">
                 <div class="flex-child flex-parent">
-                    <div class="flex-child">Best sellers</div>
-                    <div class="flex-child"><a href="{% url 'product-list' %}">Visit Shop</a></div>
-                </div>
-                <div class="flex-child flex-parent">
                     {% for product in popular_products %}
                         <div class="product-internal">
                             <div class="r-product-image">
@@ -26,16 +22,10 @@
                         </div>
                     {% endfor %}
                 </div>
+                <div id="visit-shop" class="flex-child flex-parent">
+                    <div class="flex-child"><a href="{% url 'product-list' %}">Visit Shop</a></div>
+                </div>
 
-            </div>
-            <div id="search-bar" class="flex-child home-inner-section">
-                <div>
-                    Latest articles
-                </div>
-                <div>
-                    <!-- TODO: Add articles in here -->
-                    Article Article Article
-                </div>
             </div>
             <div id="latest-news" class="flex-child home-inner-section">
                 <div>
@@ -44,6 +34,15 @@
                 <div>
                     <!-- TODO: Implement the search box -->
                     Actual Search Box
+                </div>
+            </div>
+            <div id="search-bar" class="flex-child home-inner-section">
+                <div>
+                    Latest articles
+                </div>
+                <div>
+                    <!-- TODO: Add articles in here -->
+                    Article Article Article
                 </div>
             </div>
         </div>

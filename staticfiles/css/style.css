@@ -101,11 +101,12 @@ body {
 
 #innerMain {
     /*background: black;*/
-    width: 83%;
+    width: 90%;
     margin: 0 auto;
     min-height: 200px;
     overflow: hidden;
     padding: 50px 50px;
+    box-sizing: border-box;
 }
 
 #footer {
@@ -230,12 +231,15 @@ body {
 
 .product-details {
     background: rgba(19, 18, 18, 0.5);
-    width: 80%;
     padding-left: 30px;
     margin: 0 auto;
     overflow: hidden;
     box-sizing: border-box;
     border: 2px dotted black;
+}
+
+#product-details-add-to-cart {
+
 }
 
 .product-details-top {
@@ -263,15 +267,37 @@ body {
     margin: 0 auto;
     border: 10px solid #524f4a;
     padding: 20px;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
     box-sizing: border-box;
     display: flex;
     background: rgb(255, 255, 255);
+    color: black;
 }
 
+#recommendedProducts a {
+    display: inline-block;
+    color: rgb(255, 255, 254);
+    font-weight: 400;
+    font-size: 12px;
+    background: #524f4a;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 12px 10px;
+    text-align: center;
+    margin-left: 11px;
+    width:150px;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    height: 12px;
+}
+
+#visit-shop {
+    margin-top: 15px;
+}
 
 .product-internal {
-    border: 1px solid grey;
+    /*border: 1px solid grey;*/
     color: black;
     width: 30%;
     margin: auto;
@@ -318,5 +344,17 @@ body {
 }
 
 .flex-child {
+    margin: auto;
+}
+
+#article-page-parent {
+    display: flex;
+}
+
+#article-page-title {
+    margin: auto;
+}
+
+#article-page-summary {
     margin: auto;
 }

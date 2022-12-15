@@ -6,7 +6,7 @@ from friendoftech.accounts.models import AppUser
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(
-        max_length=40,
+        max_length=120,
         null=False,
         blank=False,
     )
@@ -22,8 +22,7 @@ class Article(models.Model):
         auto_now_add=True,
     )
 
-    summary = models.CharField(
-        max_length=75,
+    summary = models.TextField(
         null=False,
         blank=False,
     )
@@ -40,3 +39,19 @@ class Article(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
+
+class ClientMessage(models.Model):
+    full_name = models.CharField(
+        max_length=60,
+    )
+
+    email_address = models.EmailField(
+        null=False,
+        blank=False,
+    )
+
+    subject = models.CharField(
+        max_length=50,
+    )
+    message = models.TextField()

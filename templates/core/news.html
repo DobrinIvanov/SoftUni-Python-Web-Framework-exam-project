@@ -4,8 +4,12 @@
     <div id="main">
         <div id="innerMain">
             <div id="articles">
-                {% for article in page_obj %}
-                    <div> {{ article }}</div>
+                {% for article in articles %}
+                    <div class="article">
+                        <div class="article-title"> {{ article.title }}</div>
+                        <div class="article-summary"><p>{{ article.summary }}</p></div>
+                    <a href="{% url 'article-details' articleid=article.pk %}"></a>
+                    </div>
                 {% endfor %}
                 <div></div>
             </div>

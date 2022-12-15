@@ -15,6 +15,7 @@ urlpatterns = (
         path('<int:pid>/', include([
             path('remove-cart-product/', shop_views.remove_cartproduct_view, name='remove-cart-product'),
             path('add-cart-product/', shop_views.add_cartproduct_view, name='add-cart-product'),
+            path('write-review/', shop_views.WriteReview.as_view(), name='write-review'),
         ])),
         path('<int:orderid>/', include([
             path('edit-order/', shop_views.edit_order_cart_redirect, name='edit-order-cart-redirect'),

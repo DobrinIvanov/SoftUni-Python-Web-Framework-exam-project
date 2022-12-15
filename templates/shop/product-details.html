@@ -1,8 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block page_content %}
-    <div id="main"><span class="tm_bottom"></span>
-        <div id="my-content">
+    <div id="main">
+        <div id="innerMain">
             <div id="product-details-section">
                 <div class="product-details">
                     <div>
@@ -26,6 +26,36 @@
                 </div>
                 <div id="product-details-add-to-cart">
                     <a href="{% url 'add-to-cart' pk=request.user.pk product_pk=object.pk %}">Add to Cart</a>
+                </div>
+            </div>
+            <div id="product-reviews-section">
+                {% if object.review_set %}
+                    <div id="write-review">
+                        <div id="write-review-btn">
+                            <a href="{% url 'write-review' pk=request.user.pk pid=object.pk %}">Write a review</a>
+                        </div>
+                    </div>
+                {% endif %}
+                <div id="reviews">
+                    {% if not reviews %}
+                        {% for review in reviews %}
+                            <div class="review-list">
+                                <div id="reivew-author">
+                                    {{ review.author }}
+                                </div>
+                                {% if review.is_positive %}
+                                    <div>thumbs up</div>
+                                {% else %}
+                                    <div>thumbs down</div>
+                                {% endif %}
+                                <div id="comment">
+                                    {{ review.comment }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        There are no reviews for this product
+                    {% endif %}
                 </div>
             </div>
         </div>

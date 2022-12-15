@@ -33,7 +33,15 @@ class ContactUsView(views.FormView):
 
 class NewsView(views.ListView):
     model = Article
+    context_object_name = 'articles'
     template_name = 'core/news.html'
+    paginate_by = 6
+
+
+class ArticleView(views.DetailView):
+    model = Article
+    context_object_name = 'article'
+    template_name = 'core/article.html'
 
 
 class AboutUsView(views.TemplateView):

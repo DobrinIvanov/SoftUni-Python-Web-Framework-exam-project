@@ -4,8 +4,9 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from friendoftech.shop.forms import WriteReviewForm
 from friendoftech.shop.functions import get_products_and_quantities_per_user_cart
-from friendoftech.shop.models import Product, CartProduct, Cart, Order, OrderProduct
+from friendoftech.shop.models import Product, CartProduct, Cart, Order, OrderProduct, Review
 
 UserModel = get_user_model()
 
@@ -22,9 +23,19 @@ class ProductDetailsView(views.DetailView):
     model = Product
     template_name = 'shop/product-details.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = context['object']
+        if product.review_set:
+            reviews = product.review_set
+        else:
+            reviews = None
+        context['reviews'] = reviews
+        return context
 
-def add_to_cart(request, pk, product_pk):
-    product = Product.objects.filter(pk=product_pk).get()
+
+def add_to_cart(request, pk, pid):
+    product = Product.objects.filter(pk=pid).get()
     current_cart = Cart.objects.filter(user_id__id=pk).get()
     products_added = current_cart.cartproduct_set.all()
     if product.pk in [p.product_id for p in products_added]:
@@ -34,7 +45,7 @@ def add_to_cart(request, pk, product_pk):
     else:
         new_product = CartProduct(product=product, cart=current_cart)
         new_product.save()
-    return redirect(reverse_lazy('product-details', kwargs={'pk': product_pk}))
+    return redirect(reverse_lazy('product-details', kwargs={'pk': pid}))
 
 
 class CartView(views.TemplateView, LoginRequiredMixin):
@@ -140,4 +151,15 @@ class CompleteOrderView(views.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['orderid'] = self.orderid
+        return context
+
+
+class WriteReview(views.FormView):
+    template_name = 'shop/write-review.html'
+    form_class = WriteReviewForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product_id = self.kwargs
+        context['product_name'] = product_name
         return context

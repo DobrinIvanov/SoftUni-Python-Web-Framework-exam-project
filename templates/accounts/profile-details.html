@@ -1,25 +1,13 @@
 {% extends 'base/base.html' %}
 
 {% block page_content %}
-    <div id="main"><span class="tm_bottom"></span>
-        <div id="my-content">
+    <div id="main">
+        <div id="innerMain">
             <div id="profile-details">
-                <p>
-                    <b>First name:</b>
                     {{ object.first_name }}
-                </p>
-                <p>
-                <b>Last name:</b>
                     {{ object.last_name }}
-                </p>
-                <p>
-                <b>Email address:</b>
                     {{ object.email }}
-                </p>
-                <p>
-                <b>Date joined:</b>
                     {{ object.date_joined }}
-                </p>
             </div>
             {% if request.user.id == object.id or request.user.is_staff %}
             <div id="profile-actions">

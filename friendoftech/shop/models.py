@@ -179,7 +179,7 @@ class CartProduct(models.Model):
 
 
 class Review(models.Model):
-    MAX_COMMENT_LENGTH = 200
+    MAX_COMMENT_LENGTH = 300
 
     product = models.ForeignKey(
         Product,

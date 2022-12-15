@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div id="main">
+        <div id="innerMain">
+            <div id="write-review">
+                <div id="review-header">
+                    You are writing a review for product {{  }}
+                </div>
+                <form method="post">
+                    <div id="review-is-positive">Are you happy with the product? (check for 'yes') {{ form.is_positive }}</div>
+
+                    <br/>
+                    <div id="review-comment">{{ form.comment }}</div>
+
+                    <br/>
+                    <div id="review-buttone"><button>Submit</button></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

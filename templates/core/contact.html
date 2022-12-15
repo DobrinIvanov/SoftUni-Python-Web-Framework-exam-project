@@ -5,7 +5,10 @@
         <div id="innerMain">
             <section id="contact-form">
                 <form method="POST" action="{% url 'contact' %}">
-                    {{ form.as_p }}
+                    {{ form.full_name }}
+                    {{ form.email_address }}
+                    {{ form.subject }}
+                    {{ form.message }}
                     {% csrf_token %}
 
                     <button class="submit_contact_form" type="submit">Submit</button>
