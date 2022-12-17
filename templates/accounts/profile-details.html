@@ -3,17 +3,41 @@
 {% block page_content %}
     <div id="main">
         <div id="innerMain">
-            <div id="profile-details">
-                    {{ object.first_name }}
-                    {{ object.last_name }}
-                    {{ object.email }}
-                    {{ object.date_joined }}
+            <div id="profile-details-container">
+                <div id="profile-details">
+                    <div class="flex-parent"><h2>Profile details</h2></div>
+                    <div class="flex-parent">
+                        <div class="flex-child profile-details-div"><b>First name:</b></div>
+                        <div class="flex-child profile-details-div"><i>{{ object.first_name }}</i></div>
+                    </div>
+                    <div class="flex-parent">
+                        <div class="flex-child profile-details-div"><b>Last name:</b></div>
+                        <div class="flex-child profile-details-div"><i>{{ object.last_name }}</i></div>
+                    </div>
+                    <div class="flex-parent">
+                        <div class="flex-child profile-details-div"><b>Email address:</b></div>
+                        <div class="flex-child profile-details-div"><i>{{ object.email }}</i></div>
+                    </div>
+                    <div class="flex-parent">
+                        <div class="flex-child profile-details-div"><b>Date joined:</b></div>
+                        <div class="flex-child profile-details-div"><i>{{ object.date_joined }}</i></div>
+                    </div>
+                    <br/> <br/>
+                    {% if request.user.id == object.id or request.user.is_staff %}
+                        <div id="profile-actions">
+                            <a href="{% url 'profile-edit' pk=object.pk %}">Edit Profile</a>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+{#                <br/> <br/>#}
+{#                {% if request.user.id == object.id or request.user.is_staff %}#}
+{#                    <div id="profile-actions">#}
+{#                        <a href="{% url 'profile-edit' pk=object.pk %}">Edit Profile</a>#}
+{#                    </div>#}
+{#                {% endif %}#}
             </div>
-            {% if request.user.id == object.id or request.user.is_staff %}
-            <div id="profile-actions">
-                <a href="{% url 'profile-edit' pk=object.pk %}">Edit Profile</a>
-            </div>
-            {% endif %}
         </div>
         <div class="cleaner"></div>
     </div>

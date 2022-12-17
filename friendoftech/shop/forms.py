@@ -20,7 +20,6 @@ class CheckoutForm(forms.Form):
 
 
 class WriteReviewForm(forms.ModelForm):
-    model = Review
 
     class Meta:
         model = Review

@@ -29,6 +29,6 @@ def convert_cartproduct_to_orderproduct(cartproducts_queryset):
 
 
 def get_popular_products():
-    products = Product.objects.all().order_by()
+    products = Product.objects.all()
     popular_products = products.order_by('-sold')[:3]
     return popular_products

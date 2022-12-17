@@ -4,11 +4,15 @@
     <div id="main">
         <div id="innerMain">
             <div id="articles">
+            <div style="box-sizing: border-box; text-align: center;"><h1>News & Articles</h1></div>
                 {% for article in articles %}
-                    <div class="article">
-                        <div class="article-title"> {{ article.title }}</div>
-                        <div class="article-summary"><p>{{ article.summary }}</p></div>
-                    <a href="{% url 'article-details' articleid=article.pk %}"></a>
+                    <div class="article flex-parent outer-article">
+                        <div class="flex-parent flex-child inner-article">
+                            <div class="article-title flex-child"> {{ article.title }}</div>
+                            <div class="article-summary flex-child"><p>{{ article.summary }}</p></div>
+                        </div>
+                        <div class="flex-child"><a href="{% url 'article-details' articleid=article.pk %}"></a></div>
+
                     </div>
                 {% endfor %}
                 <div></div>

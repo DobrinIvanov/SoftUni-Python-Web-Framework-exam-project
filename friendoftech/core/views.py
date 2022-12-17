@@ -1,10 +1,12 @@
 # from django.shortcuts import render
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from friendoftech.core.forms import ContactForm
 from django.core.mail import send_mail
 
+from friendoftech.core.functions import get_latest_articles
 from friendoftech.core.models import Article
 from friendoftech.shop.functions import get_popular_products, get_total_items_per_user_cart
 
@@ -20,8 +22,10 @@ class IndexView(views.TemplateView):
         context_data = super().get_context_data(**kwargs)
 
         popular_products = get_popular_products()
+        latest_articles = get_latest_articles()
 
         context_data['popular_products'] = popular_products
+        context_data['latest_articles'] = latest_articles
         return context_data
 
 
@@ -46,3 +50,11 @@ class ArticleView(views.DetailView):
 
 class AboutUsView(views.TemplateView):
     template_name = 'core/about.html'
+
+
+def search_results(request):
+    context = {
+
+    }
+
+    return render(request, 'core/search-results.html', context)

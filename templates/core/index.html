@@ -27,22 +27,37 @@
                 </div>
 
             </div>
-            <div id="latest-news" class="flex-child home-inner-section">
-                <div>
-                    Search box
-                </div>
-                <div>
-                    <!-- TODO: Implement the search box -->
-                    Actual Search Box
-                </div>
-            </div>
             <div id="search-bar" class="flex-child home-inner-section">
-                <div>
-                    Latest articles
+                    <div id="search-container">
+                        <form class="search-form">
+                            <div>
+                                <label for="search">
+                                <input class="search-form-input" type="search" placeholder="Search" name="search"></label>
+                            </div>
+                            <div>
+                                <button class="fade-in-button" id="search-btn">Search</button>
+                            </div>
+
+                        </form>
+                    </div>
+            </div>
+            <div id="latest-articles" class="flex-child home-inner-section">
+                <div class="flex-child flex-parent">
+                    {% for article in latest_articles %}
+                        <div class="article-internal">
+                            <div class="r-article-details">
+                                <div class="r-article-name">
+                                    {{ article.name }}
+                                </div>
+                                <div class="r-article-price">
+                                    {{ article.price }} $
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-                <div>
-                    <!-- TODO: Add articles in here -->
-                    Article Article Article
+                <div id="visit-articles" class="flex-child flex-parent">
+                    <div class="flex-child"><a href="{% url 'news' %}">Check all articles</a></div>
                 </div>
             </div>
         </div>
