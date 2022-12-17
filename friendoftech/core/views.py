@@ -32,7 +32,7 @@ class IndexView(views.TemplateView):
 class ContactUsView(views.FormView):
     template_name = 'core/contact.html'
     form_class = ContactForm
-    success_url = reverse_lazy('contact')
+    success_url = reverse_lazy('index')
 
 
 class NewsView(views.ListView):
@@ -53,6 +53,8 @@ class AboutUsView(views.TemplateView):
 
 
 def search_results(request):
+    # all_objects =
+
     context = {
 
     }

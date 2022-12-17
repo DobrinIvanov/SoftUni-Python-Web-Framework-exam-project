@@ -8,10 +8,9 @@
                 {% for article in articles %}
                     <div class="article flex-parent outer-article">
                         <div class="flex-parent flex-child inner-article">
-                            <div class="article-title flex-child"> {{ article.title }}</div>
-                            <div class="article-summary flex-child"><p>{{ article.summary }}</p></div>
+                            <div class="article-title flex-child"><b>{{ article.title }}</b></div>
                         </div>
-                        <div class="flex-child"><a href="{% url 'article-details' articleid=article.pk %}"></a></div>
+                        <div class="flex-child"><a href="{% url 'article-details' pk=article.pk %}" class="regular-btn">View article</a></div>
 
                     </div>
                 {% endfor %}

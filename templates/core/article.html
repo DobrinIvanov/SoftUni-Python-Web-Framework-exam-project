@@ -5,16 +5,16 @@
         <div id="innerMain">
             <div id="article-page-parent">
                 <div id="article-page-image">
-                    <img src="{% static article.image.url %}" alt="article-image" />
-                </div>
-                <div id="article-page-text">
-                    <div id="article-page-title"></div>
-                    <div id="article-page-summary"></div>
+                    <div id="article-page-title" style="text-align: center; margin-bottom: 30px;"><b>{{ article.title }}</b></div>
+                    <div id="article-page-summary">
+                        <img src="{% static article.image.url %}" alt="article-image" style="float:left; margin-bottom: 10px; margin-right:20px;"/>
+                    <p style="text-align:justify; margin: 5px;">{{ article.content }}</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="back-to-news-btn">
-                <a href="{% url 'news' %}">Back</a>
+            <div id="back-to-news-btn">
+                <a href="{% url 'news' %}" class="regular-btn">Back</a>
             </div>
         </div>
     </div>

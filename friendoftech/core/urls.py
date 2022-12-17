@@ -6,7 +6,7 @@ urlpatterns = (
     path('contact/', ContactUsView.as_view(), name='contact'),
     path('news/', include([
         path('', NewsView.as_view(), name='news'),
-        path('<int:articleid>/details/', ArticleView.as_view(), name='article-details'),
+        path('<int:pk>/details/', ArticleView.as_view(), name='article-details'),
     ])),
     path('about/', AboutUsView.as_view(), name='about'),
     path('search-results/', search_results, name='search-results'),
