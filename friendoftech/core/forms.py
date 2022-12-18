@@ -7,3 +7,4 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = ClientMessage
         fields = '__all__'
+

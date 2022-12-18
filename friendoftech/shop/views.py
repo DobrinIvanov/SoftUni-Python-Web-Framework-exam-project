@@ -6,7 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from friendoftech.shop.forms import WriteReviewForm
 from friendoftech.shop.functions import get_products_and_quantities_per_user_cart
-from friendoftech.shop.models import Product, CartProduct, Cart, Order, OrderProduct, Review
+from friendoftech.shop.models import Product, CartProduct, Cart, Order, OrderProduct
+from guardian import mixins as guardian_mixins
 
 UserModel = get_user_model()
 
@@ -22,14 +23,12 @@ class ProductListView(views.ListView):
 class ProductDetailsView(views.DetailView):
     model = Product
     template_name = 'shop/product-details.html'
+    context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        product = context['object']
-        if product.review_set:
-            reviews = product.review_set
-        else:
-            reviews = None
+        product = context['product']
+        reviews = product.review_set
         context['reviews'] = reviews
         return context
 
@@ -161,5 +160,5 @@ class WriteReview(views.FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product_id = self.kwargs
-        context['product_name'] = product_name
+        # context['product_name'] = product_name
         return context

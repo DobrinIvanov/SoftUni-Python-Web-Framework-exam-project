@@ -3,7 +3,12 @@
 {% block page_content %}
     <div id="main">
         <div id="innerMain">
-            <h1>You searched for:</h1>
+            {% if searched %}
+                <div>You searched for: {{ searched }}</div>
+            {% else %}
+                <div><h4>Please make sure to enter a string before trying to search! =)</h4></div>
+                <div style="padding-top: 50px;"><a href="{% url 'index' %}" class="regular-btn">Back to homepage</a></div>
+            {% endif %}
         </div>
     </div>
 

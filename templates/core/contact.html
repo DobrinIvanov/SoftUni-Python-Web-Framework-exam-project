@@ -4,17 +4,17 @@
     <div id="main">
         <div id="innerMain">
             <section id="contact-form">
-                <form method="POST" action="{% url 'contact' %}">
-                    <div><h1>Feel free to contact us </h1></div>
-                    <div>Full name: {{ form.full_name }}</div>
-                    <div>Email address: {{ form.email_address }}</div>
-                    <div>Subject: {{ form.subject }}</div>
+                <form id=contact-form" method="POST" action="{% url 'contact' %}">
+                    <div><h1>Feel free to contact us</h1></div>
+                    <div>Full name: <br/>{{ form.full_name }}</div>
+                    <div>Email address: <br/>{{ form.email_address }}</div>
+                    <div>Subject: <br/>{{ form.subject }}</div>
                     <br/>
                     Fill out your message below
                     <div>{{ form.message }}</div>
                     {% csrf_token %}
-
-                    <button class="submit_contact_form" type="submit">Submit</button>
+                    <br/>
+                    <button class="fade-in-button-two" type="submit" >Submit</button>
                 </form>
             </section>
         </div>

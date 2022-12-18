@@ -13,6 +13,12 @@ body {
 }
 
 #container a:link, a:visited {
+    /*color: white;*/
+    text-align: center;
+    text-decoration: none;
+}
+
+.profile-cart {
     color: white;
     text-align: center;
     text-decoration: none;
@@ -135,31 +141,46 @@ body {
 
 #cart-order {
     width: 100%;
-    background: rgba(120, 80, 80, 0.8);
+    /*background: rgba(120, 80, 80, 0.8);*/
     min-height: 200px;
     overflow: hidden;
     padding: 50px 50px;
     box-sizing: border-box;
 }
 
-.title {
-    margin: 0 auto;
-    padding: 10px 20px;
-    background: rgba(255, 170, 71, 0.5);
-    border: 1px solid black;
-}
+/*.title {*/
+/*    margin: 0 auto;*/
+/*    padding: 10px 20px;*/
+/*    !*background: rgba(255, 170, 71, 0.5);*!*/
+/*    border: 1px solid black;*/
+/*}*/
 
 .product {
     margin: 0 auto;
-    background: rgba(255, 65, 71, 0.5);
-    border: 1px solid black;
+    /*background: rgba(255, 65, 71, 0.5);*/
+    /*border: 1px solid black;*/
+    /*background: black;*/
+    width: 100%;
+    padding: 20px 0;
 }
 
+.cart-btn {
+    display: inline-block;
+}
 #products {
     margin: 0 auto;
-    background: rgba(240, 170, 71, 0.5);
+    background: rgba(66, 63, 50, 0.6);
     min-height: 200px;
     overflow: hidden;
+    flex-flow: column nowrap;
+    width: 100%;
+    padding: 70px 60px;
+    border-radius: 5px;
+    border: 4px solid #232119;
+}
+
+#products div {
+    padding: 11px 15px;
 }
 
 .product-name {
@@ -245,15 +266,51 @@ body {
 
 }
 
-.product-details-top {
-    /*padding-bottom: 20px;*/
+#product-details-single {
+    background: rgb(255,255,255);
+    color: black;
+    padding: 40px;
+    border-radius: 5px;
+}
 
+#in-stock {
+    text-align: left;
+    width: 100%;
+}
+
+#product-price-single {
+    text-align: left;
+    width: 100%;
+}
+
+#product-added-single {
+    text-align: left;
+    width: 100%;
+}
+
+#image-and-name {
+    flex-flow: row nowrap;
+}
+
+#product-other-details {
+    flex-flow: column nowrap;
 }
 
 .product-details-bottom {
     margin: 10px;
 }
+#product-reviews-section {
+    background: rgba(255,255,255, 0.4);
+    color: black;
+    padding: 40px;
+    border-radius: 5px;
+    margin-top: 30px;
+    flex-flow: column nowrap;
+}
 
+#reviews {
+    margin: 30px auto 10px auto;
+}
 /* HOMEPAGE */
 
 #home-inner {
@@ -301,7 +358,6 @@ body {
 }
 
 .product-internal {
-    /*border: 1px solid grey;*/
     color: black;
     width: 30%;
     margin: auto;
@@ -316,6 +372,7 @@ body {
 
 .r-product-image {
     display: inline-block;
+    padding-top: 40px;
 
 }
 
@@ -410,9 +467,15 @@ body {
 }
 
 
-form div {
+#contact-form div {
     margin: 10px 0;
-    width: 20%;
+    width: 50%;
+}
+
+#search-form div {
+    display: inline-block;
+    width: 30%;
+    margin: 10px 0;
 }
 
 #contact-form input {
@@ -435,6 +498,22 @@ label {
     transition: 0.3s;
     display: inline-block;
     height: 22px;
+    cursor: pointer;
+}
+
+.fade-in-button-two {
+    background-color: #969491;
+    border: 1px dotted black;
+    color: #020202;
+    padding: 0 80px;
+    text-align: center;
+    margin-left: 11px;
+    font-size: 16px;
+    opacity: 0.6;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+    height: 25px;
     cursor: pointer;
 }
 
@@ -492,6 +571,7 @@ label {
     background: rgba(255,255,255,0.1);
     border: 1px solid black;
     padding: 20px 20px;
+    flex-flow: column nowrap;
     margin: 10px 0;
     height: 100px;
 }
@@ -517,7 +597,7 @@ label {
 
 .regular-btn {
     background: rgba(26, 25, 25, 0.5);
-    color: #000000;
+    color: #fdfafa;
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
@@ -531,7 +611,7 @@ label {
 
 .article-btn {
     background: rgba(26, 25, 25, 0.5);
-    color: #000000;
+    color: #fcf9f9;
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
@@ -544,6 +624,75 @@ label {
     width: 100px;
 }
 
+#form {
+    display: flex;
+    flex-flow: row nowrap;
+    background: rgba(255,255,255, 0.5);
+    border-radius: 5px;
+    padding: 80px 120px;
+    color: black;
+}
+
+#sign-up-form div {
+    margin: 0 auto;
+    padding: 5px 10px;
+}
+
+#sign-up-form {
+    display: flex;
+    flex-flow: column nowrap;
+    background: grey;
+    padding-bottom: 30px;
+    border-radius: 5px;
+    border: 2px solid #463c31;
+}
+.button-new {
+    /*border: none;*/
+    /*background: rgba(49, 47, 47, 0.9);*/
+    color: #faf7f7;
+    background: #524f4a;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 40px;
+    text-align: center;
+    margin-left: 11px;
+}
+.button-new:hover {
+    background: #3d3b37;
+    font-size: 14px;
+}
 #back-to-news-btn {
     margin: 30px;
 }
+#sign-in-form-div {
+    flex-flow: column nowrap;
+}
+
+#check-articles-btn {
+    background: rgba(161, 157, 157, 0.5);
+
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    /*padding: 10px 40px;*/
+    text-align: center;
+    /*margin-left: 11px;*/
+    font-weight: 800;
+    font-size: 13px;
+    width:200px;
+}
+
+
+#sign-in-form {
+    width: 80%;
+}
+
+/*#sign-in-form div {*/
+/*    margin: 0 auto;*/
+/*    padding: 7px 5px;*/
+
+/*}*/

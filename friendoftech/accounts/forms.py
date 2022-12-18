@@ -14,6 +14,7 @@ class AppUserCreationForm(auth_forms.UserCreationForm):
         fields = (UserModel.USERNAME_FIELD, 'password1', 'password2', 'first_name', 'last_name')
         widgets = {
             UserModel.USERNAME_FIELD: django_forms.TextInput(attrs={'placeholder': 'Email'}),
+            # 'password1': django_forms.HiddenInput
         }
 
     def __init__(self, *args, **kwargs):

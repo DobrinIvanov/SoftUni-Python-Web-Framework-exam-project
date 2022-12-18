@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'friendoftech.core',
     'friendoftech.accounts',
     'friendoftech.shop',
+'guardian',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -175,3 +176,9 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
 LOGIN_URL = reverse_lazy('sign-in')
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)

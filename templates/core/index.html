@@ -29,13 +29,14 @@
             </div>
             <div id="search-bar" class="flex-child home-inner-section">
                 <div id="search-container">
-                    <form class="search-form">
-                        <div>
+                    <form id="search-form" method=POST action="{% url 'search-results' %}">
+                        <div style="display:inline-block;">
                             <label for="search">
                                 <input class="search-form-input" type="search" placeholder="Search"
-                                       name="search"></label>
+                                       name="search" aria-label="Search"></label>
+                            {% csrf_token %}
                         </div>
-                        <div>
+                        <div style="display:inline-block;">
                             <button class="fade-in-button" id="search-btn">Search</button>
                         </div>
 
@@ -57,7 +58,7 @@
                     {% endfor %}
                 </div>
                 <div id="visit-articles" class="flex-child flex-parent">
-                    <div class="flex-child"><a href="{% url 'news' %}" class="regular-btn">Check all articles</a></div>
+                    <div class="flex-child"><a href="{% url 'news' %}" id="check-articles-btn"><b>Check all articles</b></a></div>
                 </div>
             </div>
         </div>

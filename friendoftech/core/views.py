@@ -29,10 +29,15 @@ class IndexView(views.TemplateView):
         return context_data
 
 
-class ContactUsView(views.FormView):
+class ContactUsView(views.CreateView):
     template_name = 'core/contact.html'
     form_class = ContactForm
     success_url = reverse_lazy('index')
+
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=True)
+    #
+    #     return super().form_valid(form)
 
 
 class NewsView(views.ListView):
@@ -53,10 +58,16 @@ class AboutUsView(views.TemplateView):
 
 
 def search_results(request):
-    # all_objects =
 
-    context = {
+    context = {}
 
-    }
+    if request.method == 'POST':
+        search_string = request.POST['search']
+        context = {
+            'search_string': search_string,
+        }
+        return render(request, 'core/search-results.html', context)
+    else:
+        return render(request, 'core/search-results.html', context)
 
-    return render(request, 'core/search-results.html', context)
+

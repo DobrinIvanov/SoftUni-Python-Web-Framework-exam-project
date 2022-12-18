@@ -11,4 +11,12 @@ class ArticleAdmin(admin.ModelAdmin):
 
 @admin.register(ClientMessage)
 class ClientMessageAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'subject']
+
+    list_display = [
+        'full_name',
+        'subject',
+    ]
+    search_fields = ("sent_on", )
+
+
+admin.site.site_header = 'Friend of Tech Dashboard'

@@ -55,3 +55,7 @@ class ClientMessage(models.Model):
         max_length=50,
     )
     message = models.TextField()
+
+    sent_on = models.DateTimeField(
+        auto_now_add=True,
+    )

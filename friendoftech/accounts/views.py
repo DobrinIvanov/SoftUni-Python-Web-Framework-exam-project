@@ -42,7 +42,7 @@ class SignOutView(auth_views.LogoutView, LoginRequiredMixin):
 class ProfileDetailsView(views.DetailView, LoginRequiredMixin):
     model = UserModel
     template_name = 'accounts/profile-details.html'
-    raise_exception = False
+    # raise_exception = False
 
 
 class ProfileEditView(views.UpdateView):

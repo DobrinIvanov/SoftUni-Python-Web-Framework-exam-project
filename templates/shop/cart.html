@@ -5,35 +5,40 @@
     <div id="main">
         <div id="innerMain">
             <section id="cart-order">
-                <div class="title">Shopping Cart</div>
-                <div id="products">
-                {% if products %}
-                    {% for product in products %}
-                        <div class="product">
-                            <div class="product-name">
-                                {{ product.name }}
-                            </div>
-                            <div class="product-price">
-                                {{ product.price }}$
-                            </div>
-                            <div class="product-quantity">
-                                <div class='cart-add-remove'><a
-                                        href="{% url 'add-cart-product' pk=request.user.pk pid=product.id %}"><img
-                                        src="{% static 'images/plus-icon-16.png' %}" alt="add"/></a></div>
-                                <span>{{ quantities_per_name|get_dict_value:product.name }}</span>
-                                <div class="cart-add-remove"><a
-                                        href="{% url 'remove-cart-product' pk=request.user.pk pid=product.id %}"><img
-                                        src="{% static 'images/minus-icon-16.png' %}" alt="remove"/></a></div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    {% else %}
-                    <div><span>Your shopping cart is empty!</span></div>
-                {% endif %}
+
+                <div id="products" class="flex-parent">
+                    <div class="title"><h2>Shopping Cart</h2></div>
                     {% if products %}
-                        <div class="cart-btn"><a href="{% url 'checkout' pk=request.user.pk %}">Checkout</a></div>
+                        {% for product in products %}
+                            <div class="product" class="flex-child">
+                                <div class="product-name">
+                                    {{ product.name }}
+                                </div>
+                                <div class="product-price">
+                                    {{ product.price }}$
+                                </div>
+                                <div class="product-quantity">
+                                    <div class='cart-add-remove'><a
+                                            href="{% url 'add-cart-product' pk=request.user.pk pid=product.id %}"><img
+                                            src="{% static 'images/plus-icon-16.png' %}" alt="add"/></a></div>
+                                    <span>{{ quantities_per_name|get_dict_value:product.name }}</span>
+                                    <div class="cart-add-remove"><a
+                                            href="{% url 'remove-cart-product' pk=request.user.pk pid=product.id %}"><img
+                                            src="{% static 'images/minus-icon-16.png' %}" alt="remove"/></a></div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div><span>Your shopping cart is empty!</span></div>
                     {% endif %}
-                    <div class="cart-btn"><a href="{% url 'product-list' %}">Back to the shop</a></div>
+                    <div style="padding-top: 15px;">
+                        {% if products %}
+                            <div class="cart-btn"><a href="{% url 'checkout' pk=request.user.pk %}" class="button-new">Checkout</a>
+                            </div>
+                        {% endif %}
+                        <div class="cart-btn"><a href="{% url 'product-list' %}" class="button-new">Back to the shop</a>
+                        </div>
+                    </div>
                 </div>
                 <div>
 

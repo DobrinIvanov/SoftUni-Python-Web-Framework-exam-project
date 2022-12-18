@@ -1,42 +1,29 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
-    <div id="main"><span class="tm_bottom"></span>
-        <div id="my-content">
-            <div class="signup-form">
-                <form method="post" action="{% url 'sign-up' %}">
-                    <h1>Sign Up!</h1>
-{#                    {{ form }}#}
-                    <ul>
-                        <li>
-                            {{ form.first_name.errors }}
-                            {{ form.first_name }}
-                        </li>
-                        <li>
-                            {{ form.last_name.errors }}
-                            {{ form.last_name }}
-                        </li>
-                        <li>
-                            {{ form.email.errors }}
-                            {{ form.email }}
-                        </li>
-                        <li>
-                            {{ form.password1.errors }}
-                            {{ form.password1 }}
-                        </li>
-                        <li>
-                            {{ form.password2.errors }}
-                            {{ form.password2 }}
-                        </li>
-                    </ul>
+    <div id="main">
+        <div id="innerMain">
+            <form method="post" action="{% url 'sign-up' %}">
+
+                <div id="sign-up-form" class="flex-parent">
+                    <div><h1>Sign Up!</h1></div>
+                    <div>{{ form.first_name }}</div>
+                    <div>{{ form.last_name }}</div>
+                    <div>{{ form.email }}</div>
+                    <div>{{ form.password1 }}</div>
+                    <div>{{ form.password2 }}</div>
+                    <div>{{ form.errors }}</div>
+
                     {% csrf_token %}
-                    <button>Register</button>
-                </form>
-            </div>
-            <div>
-                <a href="{% url 'sign-in' %}">Sign in!</a>
-            </div>
-            </div>
-        <div class="cleaner"></div>
+                    <div>
+                        <a><button class="button-new">Register</button></a>
+                    </div>
+                    <div>
+                        <a href="{% url 'sign-in' %}" class="button-new">Sign in!</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
 
 {% endblock %}

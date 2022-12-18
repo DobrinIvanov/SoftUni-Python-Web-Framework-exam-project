@@ -21,10 +21,10 @@
                 <div class="userSection">
                     <ul class="userSectionLists">
                         <!-- Configure URLs here -->
-                        <li><a href="{% url 'profile-details' pk=request.user.pk %}">My Profile</a></li> / <li><a href="{% url 'sign-out' %}">Logout</a></li>
+                        <li><a href="{% url 'profile-details' pk=request.user.pk %}" class="profile-cart">My Profile</a></li> / <li><a href="{% url 'sign-out' %}" class="profile-cart">Logout</a></li>
                     </ul>
                     <ul class="userSectionLists">
-                        <li><a href="{% url 'cart' pk=request.user.pk %}">Shopping Cart ({{ cart_items }})</a></li>
+                        <li><a href="{% url 'cart' pk=request.user.pk %}" class="profile-cart">Shopping Cart ({{ cart_items }})</a></li>
                     </ul>
                 </div>
 
@@ -32,7 +32,7 @@
                 {% else %}
                 <div class="userSection">
                     <ul>
-                        <li><a href="{% url 'sign-up' %}">Sign up!</a></li>  /  <li><a href="{% url 'sign-in' %}">Sign in!</a></li>
+                        <li><a href="{% url 'sign-up' %}" class="profile-cart">Sign up!</a></li>  /  <li><a href="{% url 'sign-in' %}" class="profile-cart">Sign in!</a></li>
                     </ul>
                 </div>
                 <!-- end if -->
@@ -54,7 +54,7 @@
 {% endblock %}
         <div id="footer">
             <div id="copyright">
-                Copyright&#169; 2022 <a href="{% url 'index' %}">FRIENDOFTECH</a>. All rights reserved.
+                Copyright&#169; 2022 <a href="{% url 'index' %}" class="profile-cart">FRIENDOFTECH</a>. All rights reserved.
             </div>
         </div>
     </div>
