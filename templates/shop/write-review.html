@@ -3,21 +3,25 @@
 {% block page_content %}
     <div id="main">
         <div id="innerMain">
-            <div id="write-review">
-                <div id="review-header">
-                    You are writing a review for product {{  }}
-                </div>
-                <form method="post">
-                    <div id="review-is-positive">Are you happy with the product? (check for 'yes') {{ form.is_positive }}</div>
+            <form method="post">
+                {% csrf_token %}
+                <div id="write-review">
+                    <div id="review-header">
+                        You are writing a review for product <b>{{ product.name }}</b>
+                    </div>
 
                     <br/>
                     <div id="review-comment">{{ form.comment }}</div>
-
                     <br/>
-                    <div id="review-buttone"><button>Submit</button></div>
+                    <div id="review-is-positive">Are you happy with the product? (check for
+                        'yes') {{ form.is_positive }}</div>
+                    <br/>
+                    <div id="review-buttone">
+                        <button>Submit</button>
+                    </div>
 
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 

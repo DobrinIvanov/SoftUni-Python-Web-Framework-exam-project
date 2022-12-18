@@ -35,12 +35,13 @@
                             {{ product.description }}
                         </div>
                     </div>
-                <br/><br/>
+                    <br/><br/>
                     <div id="product-details-add-to-cart">
                         {% if request.user.is_authenticated %}
-                        <a href="{% url 'add-to-cart' pk=request.user.pk product_pk=object.pk %}" class="regular-btn">Add
-                            to
-                            Cart</a>
+                            <a href="{% url 'add-to-cart' pk=request.user.pk product_pk=object.pk %}"
+                               class="regular-btn">Add
+                                to
+                                Cart</a>
                         {% endif %}
                     </div>
                 </div>
@@ -50,31 +51,35 @@
                 <div id="write-review" class="flex-child">
                     <div id="write-review-btn">
                         {% if request.user.is_authenticated %}
-                        <a href="{% url 'write-review' pk=request.user.pk pid=object.pk %}" class="regular-btn">Write a
-                            review</a>
+                            <a href="{% url 'write-review' pk=request.user.pk pid=object.pk %}" class="regular-btn">Write
+                                a
+                                review</a>
                         {% endif %}
                     </div>
                 </div>
                 <div id="reviews" class="flex-child">
-                    {% if reviews.exists %}
-                        {% for review in reviews %}
-                            <div class="review-list">
-                                <div id="reivew-author">
-                                    {{ review.author }}
+                    {#                    {% if reviews.exists and reviews.count > 1 %}#}
+                    {% for review in reviews %}
+                        <div class="review-list">
+                            <div class="author-positive">
+                                <div class="reivew-author">
+                                    <b>by:</b> <i>{{ review.author }}</i>
                                 </div>
                                 {% if review.is_positive %}
                                     <div><img src="{% static 'images/thumbs-up.png' %}" alt="up"></div>
                                 {% else %}
                                     <div><img src="{% static 'images/thumbs-down.png' %}" alt="up"></div>
                                 {% endif %}
-                                <div id="comment">
-                                    {{ review.comment }}
-                                </div>
                             </div>
-                        {% endfor %}
-                    {% else %}
-                        <b>There are no reviews for this product</b>
-                    {% endif %}
+                            <div class="comment">
+                                {{ review.comment }}
+                            </div>
+
+                        </div>
+                    {% empty %}
+                        <div>There are no reviews for this product</div>
+                    {% endfor %}
+
                 </div>
             </div>
         </div>

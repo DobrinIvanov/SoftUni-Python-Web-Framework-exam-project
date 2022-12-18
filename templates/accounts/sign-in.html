@@ -6,12 +6,12 @@
             <div id="form">
                 <form id="sign-in-form" method="POST" action="{% url 'sign-in' %}">
                     <div class="flex-child">
-                        <h3 style="text-align: center;">Sign up here at Friend of Tech</h3>
+                        <h3 style="text-align: center;">Sign in at Friend of Tech</h3>
                     </div>
                      <div class="sign-in-form-div flex-parent flex-child">
-                        <div class="flex-child">Email:</div>
+                        <div class="flex-child">Email: </div>
                         <div class="flex-child">{{ form.username }}</div>
-                        <div class="flex-child">Password:</div>
+                        <div class="flex-child">Password: </div>
                         <div class="flex-child">{{ form.password }}</div>
                         <div class="flex-child"><button class="button-new">Login</button></div>
                     </div>

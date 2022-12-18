@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -28,13 +29,16 @@ class ProductDetailsView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = context['product']
-        reviews = product.review_set
+        reviews = product.review_set.all()
         context['reviews'] = reviews
         return context
 
 
-def add_to_cart(request, pk, pid):
-    product = Product.objects.filter(pk=pid).get()
+@login_required
+def add_to_cart(request, pk, product_pk):
+    if not pk == request.user.pk:
+        return redirect('sign-in')
+    product = Product.objects.filter(pk=product_pk).get()
     current_cart = Cart.objects.filter(user_id__id=pk).get()
     products_added = current_cart.cartproduct_set.all()
     if product.pk in [p.product_id for p in products_added]:
@@ -44,36 +48,13 @@ def add_to_cart(request, pk, pid):
     else:
         new_product = CartProduct(product=product, cart=current_cart)
         new_product.save()
-    return redirect(reverse_lazy('product-details', kwargs={'pk': pid}))
+    return redirect(reverse_lazy('product-details', kwargs={'pk': product_pk}))
 
 
 class CartView(views.TemplateView, LoginRequiredMixin):
     template_name = 'shop/cart.html'
 
-    # If you want to pass parameters to other methods by saving them to the class
-    # def dispatch(self, request, *args, **kwargs):
-    #     # self.cart = Cart.objects.filter(user_id=request.user.pk)
-    #     self.cartproducts = CartProduct.objects.filter(cart__user_id=request.user.pk)
-    #     self.products = list()
-    #     self.quantitie_per_name = {}
-    #     for cp in self.cartproducts:
-    #         curr_product = Product.objects.filter(id=cp.product_id).get()
-    #         self.products.append(curr_product)
-    #         self.quantitie_per_name[curr_product.name] = cp.quantity
-    #     return super(CartView, self).dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
-
-        # cartproducts = CartProduct.objects.filter(cart__user_id=self.request.user.pk)
-        # products = list()
-        # quantities_per_name = {}
-        # for cp in cartproducts:
-        #     curr_product = Product.objects.filter(id=cp.product_id).get()
-        #     products.append(curr_product)
-        #     quantities_per_name[curr_product.name] = cp.quantity
-
-        # Returns list(products) and dict(quantities_per_name)
-
         products, quantities_per_name = get_products_and_quantities_per_user_cart(self.request.user.pk)
         context = super().get_context_data(**kwargs)
         context['products'] = products
@@ -81,7 +62,7 @@ class CartView(views.TemplateView, LoginRequiredMixin):
         return context
 
 
-class CheckoutView(views.TemplateView):
+class CheckoutView(views.TemplateView, LoginRequiredMixin):
     template_name = 'shop/checkout.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -114,6 +95,8 @@ class CheckoutView(views.TemplateView):
 
 
 def add_cartproduct_view(request, pk, pid):
+    if not pk == request.user.pk:
+        return redirect('sign-in')
     cart_id = Cart.objects.filter(user_id=pk).get().pk
     cartproduct = CartProduct.objects.filter(cart_id=cart_id).filter(product_id=pid).get()
     cartproduct.quantity += 1
@@ -122,6 +105,8 @@ def add_cartproduct_view(request, pk, pid):
 
 
 def remove_cartproduct_view(request, pk, pid):
+    if not pk == request.user.pk:
+        return redirect('sign-in')
     cart_id = Cart.objects.filter(user_id=pk).get().pk
     cartproduct = CartProduct.objects.filter(cart_id=cart_id, product_id=pid).get()
     if cartproduct.quantity == 1:
@@ -153,12 +138,20 @@ class CompleteOrderView(views.TemplateView):
         return context
 
 
-class WriteReview(views.FormView):
+class WriteReview(views.CreateView, LoginRequiredMixin):
     template_name = 'shop/write-review.html'
     form_class = WriteReviewForm
+    success_url = reverse_lazy('product-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        product_id = self.kwargs
-        # context['product_name'] = product_name
+        product_id = self.kwargs['pid']
+        # user_pk = self.kwargs['pk']
+        product = Product.objects.filter(id=product_id).get()
+        context['product'] = product
         return context
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.product_id = self.kwargs['pid']
+        return super(WriteReview, self).form_valid(form)

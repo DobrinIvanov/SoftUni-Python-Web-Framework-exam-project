@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views, login, get_user_model
 from django.views import generic as views
@@ -33,6 +34,11 @@ class SignInView(auth_views.LoginView):
     def get_success_url(self):
         return reverse_lazy('index')
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('index')
+        return super().dispatch(request, *args, **kwargs)
+
 
 class SignOutView(auth_views.LogoutView, LoginRequiredMixin):
     template_name = 'accounts/sign-out.html'
@@ -42,10 +48,13 @@ class SignOutView(auth_views.LogoutView, LoginRequiredMixin):
 class ProfileDetailsView(views.DetailView, LoginRequiredMixin):
     model = UserModel
     template_name = 'accounts/profile-details.html'
-    # raise_exception = False
+
+    # def get_object(self, queryset=None):
+    #     return UserModel.objects.filter(id=self.request.user.pk).get()
+    # # raise_exception = False
 
 
-class ProfileEditView(views.UpdateView):
+class ProfileEditView(views.UpdateView, LoginRequiredMixin):
     model = UserModel
     template_name = 'accounts/profile-edit.html'
     fields = ('first_name', 'last_name', 'email')
@@ -53,8 +62,12 @@ class ProfileEditView(views.UpdateView):
     def get_success_url(self):
         return reverse_lazy('profile-details', kwargs={'pk': self.kwargs['pk']})
 
+    def dispatch(self, request, *args, **kwargs):
+        result = super().dispatch(*args, **kwargs)
+        return result
 
-class ChangePasswordView(auth_views.PasswordChangeView):
+
+class ChangePasswordView(auth_views.PasswordChangeView, LoginRequiredMixin):
     form_class = PasswordChangeForm
     template_name = 'accounts/profile-password-update.html'
     success_url = reverse_lazy('index')

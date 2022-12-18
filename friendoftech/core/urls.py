@@ -10,5 +10,4 @@ urlpatterns = (
     ])),
     path('about/', AboutUsView.as_view(), name='about'),
     path('search-results/', search_results, name='search-results'),
-
 )

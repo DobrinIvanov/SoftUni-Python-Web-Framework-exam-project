@@ -8,3 +8,9 @@ class ContactForm(forms.ModelForm):
         model = ClientMessage
         fields = '__all__'
 
+
+class SearchForm(forms.Form):
+    search_string = forms.CharField(
+        max_length=40,
+    )
+

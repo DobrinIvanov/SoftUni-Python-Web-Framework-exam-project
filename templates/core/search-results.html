@@ -3,12 +3,21 @@
 {% block page_content %}
     <div id="main">
         <div id="innerMain">
-            {% if searched %}
-                <div>You searched for: {{ searched }}</div>
-            {% else %}
-                <div><h4>Please make sure to enter a string before trying to search! =)</h4></div>
-                <div style="padding-top: 50px;"><a href="{% url 'index' %}" class="regular-btn">Back to homepage</a></div>
-            {% endif %}
+            <div id="search-results-list">
+                {% if search_string %}
+                    <div>You searched for: {{ search_string }}</div>
+                    {#                    {{ search_result }}#}
+                    {% for obj in search_result %}
+                        <div>{{ obj }}</div>
+                    {% empty %}
+                        <div>Sorry! Nothing found.. Please try again</div>
+                    {% endfor %}
+                {% else %}
+                    <div><h4>Please make sure to enter a string before trying to search! =)</h4></div>
+                    <div style="padding-top: 50px;"><a href="{% url 'index' %}" class="regular-btn">Back to homepage</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 

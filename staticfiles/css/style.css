@@ -661,13 +661,17 @@ label {
 }
 .button-new:hover {
     background: #3d3b37;
-    font-size: 14px;
 }
 #back-to-news-btn {
     margin: 30px;
 }
 #sign-in-form-div {
     flex-flow: column nowrap;
+}
+
+#sign-in-form-div div {
+    /*flex-flow: column nowrap;*/
+    /*padding: 0 10px;*/
 }
 
 #check-articles-btn {
@@ -691,8 +695,28 @@ label {
     width: 80%;
 }
 
-/*#sign-in-form div {*/
-/*    margin: 0 auto;*/
-/*    padding: 7px 5px;*/
+#write-review {
+    display: flex;
+    flex-flow: column nowrap;
+}
 
-/*}*/
+#write-review div {
+    margin: 0 auto;
+}
+
+.review-list {
+    background: grey;
+    padding: 20px 10px;
+    border: 1px solid black;
+    display: flex;
+    flex-flow: row nowrap;
+
+}
+
+.review-list div {
+    margin: 0 auto;
+}
+
+.comment {
+    width: 60%;
+}
